@@ -1,0 +1,108 @@
+<style>
+html, body {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: transparent;
+}
+
+.circle {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  width: 190px;
+  height: 250px;
+  margin-left: -95px;
+  margin-top: -125px;
+  border: 2px solid red;
+  border-radius: 50%;
+  box-sizing: border-box;
+  pointer-events: none;
+}
+
+.person {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  width: 150px;
+  height: 230px;
+  margin-left: -75px;
+  margin-top: -115px;
+  animation: breathe 2.4s ease-in-out infinite;
+}
+
+.person * {
+  vector-effect: non-scaling-stroke;
+}
+
+.skin {
+  fill: #f3b38f;
+  stroke: #351f2b;
+  stroke-width: 3;
+}
+
+.shirt {
+  fill: #5b5de6;
+  stroke: #351f2b;
+  stroke-width: 3;
+}
+
+.pants {
+  fill: #263653;
+  stroke: #351f2b;
+  stroke-width: 3;
+}
+
+.hair {
+  fill: #351f2b;
+}
+
+.pin {
+  fill: #ef3340;
+  stroke: #fff;
+  stroke-width: 2.5;
+}
+
+.pin-line {
+  stroke: #ef3340;
+  stroke-width: 2;
+  stroke-linecap: round;
+}
+
+@keyframes breathe {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-3px); }
+}
+</style>
+
+<body>
+  <div class="circle"></div>
+  <svg class="person" viewBox="0 0 150 230" role="img" aria-label="Mô hình người 2D">
+    <!-- đầu và tóc -->
+    <circle class="skin" cx="75" cy="34" r="24"/>
+    <path class="hair" d="M51 31c2-22 44-31 50 3-8-7-15-9-23-8-8 1-16 5-27 5z"/>
+    <!-- thân -->
+    <path class="shirt" d="M57 64h36c9 0 18 7 22 17l9 28-22 7-5-18v45H53V98l-5 18-22-7 9-28c4-10 13-17 22-17z"/>
+    <!-- tay -->
+    <path class="skin" d="M35 83l-14 35c-2 5 1 10 6 11 4 1 8-1 10-6l14-32z"/>
+    <path class="skin" d="M115 83l14 35c2 5-1 10-6 11-4 1-8-1-10-6L99 91z"/>
+    <!-- chân -->
+    <path class="pants" d="M53 143h44l-3 46H72l-6-29-6 29H37z"/>
+    <path class="skin" d="M37 189h22v13H30c0-7 2-11 7-13z"/>
+    <path class="skin" d="M72 189h22c5 2 7 6 7 13H72z"/>
+    <!-- khuôn mặt -->
+    <circle cx="66" cy="35" r="2.5" fill="#351f2b"/>
+    <circle cx="84" cy="35" r="2.5" fill="#351f2b"/>
+    <path d="M68 46q7 6 14 0" fill="none" stroke="#351f2b" stroke-width="2" stroke-linecap="round"/>
+    <!-- điểm ghim đầu và bụng -->
+    <g aria-label="Điểm ghim đầu">
+      <circle class="pin" cx="75" cy="34" r="6"/>
+      <path class="pin-line" d="M75 24v20M65 34h20"/>
+    </g>
+    <g aria-label="Điểm ghim bụng">
+      <circle class="pin" cx="75" cy="112" r="6"/>
+      <path class="pin-line" d="M75 102v20M65 112h20"/>
+    </g>
+  </svg>
+</body>
