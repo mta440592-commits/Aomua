@@ -1,0 +1,35 @@
+using System.Numerics;
+using ImGuiNET;
+
+public class ESPSkeleton
+{
+    // Ma trận góc nhìn lấy từ bộ nhớ của Game (ViewMatrix 4x4)
+    public static Matrix4x4 ViewMatrix; 
+    public static Vector2 ScreenSize = new Vector2(1920, 1080); // Độ phân giải màn hình
+
+    // Hàm WorldToScreen hoàn chỉnh
+    private static bool WorldToScreen(Vector3 worldPos, out Vector2 screenPos)
+    {
+        screenPos = Vector2.Zero;
+
+        // Nhân tọa độ 3D với ViewMatrix
+        float w = ViewMatrix.M14 * worldPos.X + ViewMatrix.M24 * worldPos.Y + ViewMatrix.M34 * worldPos.Z + ViewMatrix.M44;
+
+        // Nếu mục tiêu nằm phía sau Camera thì không vẽ
+        if (w < 0.01f) return false;
+
+        float x = ViewMatrix.M11 * worldPos.X + ViewMatrix.M21 * worldPos.Y + ViewMatrix.M31 * worldPos.Z + ViewMatrix.M41;
+        float y = ViewMatrix.M12 * worldPos.X + ViewMatrix.M22 * worldPos.Y + ViewMatrix.M32 * worldPos.Z + ViewMatrix.M42;
+
+        // Chuyển sang tọa độ màn hình 2D (NDC -> Screen)
+        float ndcX = x / w;
+        float ndcY = y / w;
+
+        screenPos.X = (ScreenSize.X / 2 * ndcX) + (ndcX + ScreenSize.X / 2);
+        screenPos.Y = -(ScreenSize.Y / 2 * ndcY) + (ndcY + ScreenSize.Y / 2);
+
+        return true;
+    }
+
+    // ... (Các hàm DrawBoneLine và DrawSkeleton giữ nguyên)
+}
