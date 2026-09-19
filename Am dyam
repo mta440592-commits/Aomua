@@ -1,0 +1,46 @@
+using System.Numerics; using System.Numerics; // Đảm bảo đã include namespace này cho Vector3
+
+public class PlayerData
+{
+    // Thông tin địa chỉ & Định danh
+    internal uint Address;
+    internal string Name = string.Empty;
+    internal uint Avatar;
+
+    // Trạng thái người chơi
+    public bool IsVisible { get; set; }
+    internal bool IsKnown;
+    internal bool IsInTeam;
+    internal short Health;
+    internal bool IsDead;
+    internal bool IsKnocked;
+    internal bool IsFiring;
+    internal float Distance;
+    internal string WeaponName = string.Empty;
+
+    // Tọa độ các xương (Bone Positions)
+    internal Vector3 Root;
+    internal Vector3 Head;
+    internal Vector3 Neck;
+    internal Vector3 Spine;
+    internal Vector3 Hip;
+
+    // Phân chi trên
+    internal Vector3 LeftShoulder;
+    internal Vector3 RightShoulder;
+    internal Vector3 LeftElbow;
+    internal Vector3 RightElbow;
+    internal Vector3 LeftWrist;
+    internal Vector3 RightWrist;
+    internal Vector3 LeftWristJoint;
+    internal Vector3 RightWristJoint;
+    internal Vector3 LeftHand;
+
+    // Phân chi dưới
+    internal Vector3 LeftCalf;
+    internal Vector3 RightCalf;
+    internal Vector3 LeftFoot;
+    internal Vector3 RightFoot;
+}
+
+
