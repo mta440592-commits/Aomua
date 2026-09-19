@@ -1,0 +1,66 @@
+using UnityEngine;
+
+public class DragAimToHead : MonoBehaviour
+{
+    [Header("Cấu hình Sát thương")]
+    public float bodyDamage = 30f;       // Đam Vàng (Thân)
+    public float headDamage = 75f;       // Đam Đỏ (Đầu)
+    public float dragThreshold = 40f;    // Độ nhạy vuốt lên (pixel)
+
+    [Header("Tham chiếu Khung Xương")]
+    public Transform headBone;           // Xương Đầu (Head)
+    public Transform spineBone;          // Xương Thân (Spine)
+    public Camera fpsCamera;
+
+    private Vector2 touchStartPos;
+    private bool isDraggingUp = false;
+
+    void Update()
+    {
+        // 1. Nhận diện thao tác vuốt nút bắn
+        if (Input.GetMouseButtonDown(0))
+        {
+            touchStartPos = Input.mousePosition;
+            isDraggingUp = false;
+        }
+        else if (Input.GetMouseButton(0))
+        {
+            // Kiểm tra độ chênh lệch kéo lên theo trục Y
+            if (Input.mousePosition.y - touchStartPos.y >= dragThreshold)
+            {
+                isDraggingUp = true; // Đang kéo lên hướng ĐẦU
+            }
+        }
+
+        // 2. Nhả tay để BẮN
+        if (Input.GetMouseButtonUp(0))
+        {
+            Shoot();
+        }
+    }
+
+    void Shoot()
+    {
+        // Chọn mục tiêu: KÉO LÊN -> Nhắm HEAD | KHÔNG KÉO -> Nhắm SPINE
+        Transform targetBone = isDraggingUp ? headBone : spineBone;
+
+        if (targetBone != null)
+        {
+            Vector3 direction = (targetBone.position - fpsCamera.transform.position).normalized;
+
+            if (Physics.Raycast(fpsCamera.transform.position, direction, out RaycastHit hit, 100f))
+            {
+                if (isDraggingUp)
+                {
+                    Debug.Log($"<color=red>KÉO LÊN ĐẦU! Đam Đỏ: {headDamage}</color> | Trúng: {targetBone.name}");
+                }
+                else
+                {
+                    Debug.Log($"<color=yellow>KHÔNG KÉO! Đam Vàng: {bodyDamage}</color> | Trúng: {targetBone.name}");
+                }
+            }
+        }
+
+        isDraggingUp = false; // Reset trạng thái
+    }
+}
