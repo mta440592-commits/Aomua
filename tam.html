@@ -1,108 +1,1106 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ĐỈNH CAO NHÂN SINH – Tinh Hoa Bậc Thầy</title>
 <style>
-html, body {
-  margin: 0;
-  width: 100%;
-  height: 100%;
+/* ========== RESET & BASE ========== */
+* { margin:0; padding:0; box-sizing:border-box; }
+:root {
+  --gold: #d4af37;
+  --gold-bright: #ffe28a;
+  --gold-deep: #8a6d1a;
+  --emerald: #2ecc71;
+  --crimson: #e94560;
+  --sky: #5dade2;
+  --bg: #06060b;
+  --card: rgba(18,18,28,0.55);
+  --card-border: rgba(212,175,55,0.18);
+  --text: #e8e8ee;
+  --text-muted: #9aa0b5;
+}
+
+html { scroll-behavior:smooth; }
+body {
+  font-family: 'Segoe UI', system-ui, -apple-system, 'Helvetica Neue', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.75;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+/* ========== ANIMATED UNIQUE BACKGROUND ========== */
+.bg-layer {
+  position: fixed; inset: 0; z-index: -2;
+  background: radial-gradient(ellipse at top left, #1a0d2e 0%, transparent 50%),
+              radial-gradient(ellipse at bottom right, #0d1f2d 0%, transparent 50%),
+              radial-gradient(ellipse at center, #1a0d2e 0%, #06060b 70%);
+}
+.aurora {
+  position: fixed; inset: -20%; z-index: -1;
+  background:
+    radial-gradient(circle at 20% 30%, rgba(212,175,55,0.12) 0%, transparent 40%),
+    radial-gradient(circle at 80% 20%, rgba(46,204,113,0.08) 0%, transparent 40%),
+    radial-gradient(circle at 60% 80%, rgba(233,69,96,0.08) 0%, transparent 40%),
+    radial-gradient(circle at 30% 90%, rgba(93,173,226,0.08) 0%, transparent 40%);
+  animation: auroraMove 20s ease-in-out infinite alternate;
+  filter: blur(60px);
+}
+@keyframes auroraMove {
+  0%   { transform: translate(0,0) scale(1); }
+  50%  { transform: translate(-5%,3%) scale(1.1); }
+  100% { transform: translate(5%,-3%) scale(1.05); }
+}
+.stars {
+  position: fixed; inset: 0; z-index: -1; pointer-events: none;
+  background-image:
+    radial-gradient(1.5px 1.5px at 15% 25%, rgba(255,255,255,0.7), transparent),
+    radial-gradient(1px 1px at 40% 60%, rgba(212,175,55,0.7), transparent),
+    radial-gradient(1.5px 1.5px at 75% 15%, rgba(255,255,255,0.5), transparent),
+    radial-gradient(1px 1px at 90% 85%, rgba(255,255,255,0.6), transparent),
+    radial-gradient(1px 1px at 55% 35%, rgba(212,175,55,0.6), transparent),
+    radial-gradient(1.5px 1.5px at 10% 75%, rgba(255,255,255,0.5), transparent),
+    radial-gradient(1px 1px at 85% 45%, rgba(255,255,255,0.4), transparent),
+    radial-gradient(1px 1px at 25% 55%, rgba(212,175,55,0.5), transparent),
+    radial-gradient(1.5px 1.5px at 65% 90%, rgba(255,255,255,0.5), transparent);
+  background-size: 100% 100%;
+  animation: starPulse 4s ease-in-out infinite alternate;
+}
+@keyframes starPulse { from{opacity:0.4;} to{opacity:1;} }
+
+/* ========== HEADER ========== */
+header {
+  position: relative; text-align: center;
+  padding: 80px 20px 50px;
   overflow: hidden;
-  background: transparent;
+}
+header::before {
+  content:""; position:absolute; inset:0;
+  background: radial-gradient(circle at center, rgba(212,175,55,0.15) 0%, transparent 60%);
+  pointer-events:none;
+}
+.crown {
+  display:inline-block; font-size:2.5rem; margin-bottom:10px;
+  filter: drop-shadow(0 0 20px rgba(212,175,55,0.8));
+  animation: crownGlow 2.5s ease-in-out infinite alternate;
+}
+@keyframes crownGlow {
+  from{ filter: drop-shadow(0 0 10px rgba(212,175,55,0.5)); }
+  to  { filter: drop-shadow(0 0 30px rgba(212,175,55,0.95)); }
+}
+header h1 {
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  font-weight: 900; letter-spacing: 3px;
+  background: linear-gradient(135deg, #d4af37 0%, #ffe28a 30%, #d4af37 50%, #fff5cc 70%, #d4af37 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shine 4s linear infinite;
+  position: relative; z-index:1;
+}
+@keyframes shine { to { background-position: 200% center; } }
+header .subtitle {
+  font-size: .85rem; color: var(--gold); letter-spacing: 6px;
+  text-transform: uppercase; margin-top: 14px; font-weight: 600;
+  position: relative; z-index:1;
+}
+header .tagline {
+  color: var(--text-muted); font-style: italic; margin-top: 16px;
+  font-size: .95rem; position: relative; z-index:1;
+}
+header .golden-line {
+  width: 120px; height: 2px; margin: 22px auto;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  position: relative; z-index:1;
 }
 
-.circle {
-  position: fixed;
-  left: 50%;
-  top: 50%;
-  width: 190px;
-  height: 250px;
-  margin-left: -95px;
-  margin-top: -125px;
-  border: 2px solid red;
+/* ========== NAVIGATION ========== */
+nav {
+  position: sticky; top:0; z-index:100;
+  display:flex; flex-wrap:wrap; justify-content:center; gap:8px;
+  padding: 14px 10px;
+  background: rgba(6,6,11,0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(212,175,55,0.2);
+  box-shadow: 0 4px 30px rgba(0,0,0,0.4);
+}
+nav button {
+  background: rgba(20,20,32,0.7);
+  color: var(--text-muted);
+  border: 1px solid rgba(212,175,55,0.2);
+  padding: 9px 15px; border-radius: 24px;
+  cursor: pointer; font-size: .8rem; font-weight: 500;
+  font-family: inherit;
+  transition: all .3s ease;
+  white-space: nowrap;
+}
+nav button:hover {
+  color: #fff; border-color: var(--gold);
+  background: rgba(212,175,55,0.12);
+  transform: translateY(-1px);
+}
+nav button.active {
+  background: linear-gradient(135deg, var(--gold) 0%, var(--gold-deep) 100%);
+  color: #06060b; border-color: var(--gold-bright);
+  font-weight: 800;
+  box-shadow: 0 4px 16px rgba(212,175,55,0.4);
+}
+
+/* ========== MAIN & SECTIONS ========== */
+main { max-width: 1000px; margin: 0 auto; padding: 40px 18px; }
+section { display:none; animation: fadeIn .5s ease; }
+section.active { display:block; }
+@keyframes fadeIn { from{opacity:0; transform:translateY(14px);} to{opacity:1;transform:none;} }
+
+h2 {
+  font-size: 1.7rem; font-weight: 800;
+  margin: 10px 0 8px;
+  padding-left: 16px;
+  border-left: 4px solid var(--gold);
+  background: linear-gradient(90deg, #ffe28a, #d4af37);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.section-sub {
+  color: var(--text-muted); font-style: italic;
+  margin-bottom: 28px; padding-left: 20px;
+  font-size: .92rem;
+}
+
+/* ========== GLASS CARDS ========== */
+.card {
+  background: var(--card);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid var(--card-border);
+  border-radius: 16px;
+  padding: 24px 26px;
+  margin-bottom: 18px;
+  position: relative;
+  overflow: hidden;
+  transition: all .35s ease;
+}
+.card::before {
+  content:""; position:absolute; top:0; left:0; right:0; height:1px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  opacity: 0.5;
+}
+.card::after {
+  content:""; position:absolute; left:0; top:0; bottom:0; width:3px;
+  background: linear-gradient(180deg, var(--gold), transparent);
+  opacity: 0; transition: opacity .35s;
+}
+.card:hover {
+  border-color: rgba(212,175,55,0.45);
+  transform: translateY(-3px);
+  box-shadow: 0 15px 40px rgba(212,175,55,0.1), 0 0 0 1px rgba(212,175,55,0.15);
+  background: rgba(22,22,34,0.7);
+}
+.card:hover::after { opacity: 1; }
+
+.card h3 {
+  font-size: 1.1rem; color: var(--gold-bright);
+  margin-bottom: 12px; font-weight: 700;
+  display: flex; align-items: center; gap: 10px;
+}
+.card p { color: #cdd1dd; font-size: .96rem; text-align: justify; }
+
+.num {
+  display:inline-flex; align-items:center; justify-content:center;
+  min-width: 32px; height: 32px;
   border-radius: 50%;
-  box-sizing: border-box;
-  pointer-events: none;
+  background: linear-gradient(135deg, var(--gold), var(--gold-deep));
+  color: #06060b; font-weight: 900; font-size: .9rem;
+  flex-shrink: 0;
+  box-shadow: 0 3px 10px rgba(212,175,55,0.4);
 }
 
-.person {
-  position: fixed;
-  left: 50%;
-  top: 50%;
-  width: 150px;
-  height: 230px;
-  margin-left: -75px;
-  margin-top: -115px;
-  animation: breathe 2.4s ease-in-out infinite;
+/* ========== QUOTES & EXAMPLES ========== */
+.quote {
+  display:block; margin-top: 14px; padding: 12px 16px;
+  background: rgba(212,175,55,0.06);
+  border-left: 3px solid var(--gold);
+  color: var(--gold-bright);
+  font-style: italic; font-size: .9rem;
+  border-radius: 0 10px 10px 0;
+}
+.vidu {
+  display:block; margin-top: 12px; padding: 12px 16px;
+  background: rgba(93,173,226,0.07);
+  border-left: 3px solid var(--sky);
+  color: #b3d9f2;
+  font-size: .9rem;
+  border-radius: 0 10px 10px 0;
+}
+.vidu::before {
+  content: "💡 "; font-style: normal;
+}
+.warn {
+  background: rgba(233,69,96,0.08);
+  border: 1px dashed rgba(233,69,96,0.5);
+  padding: 16px 20px; border-radius: 12px;
+  margin: 20px 0; color: #f5b7b1;
+  font-size: .92rem;
+}
+.golden-tip {
+  background: linear-gradient(135deg, rgba(212,175,55,0.15), rgba(212,175,55,0.05));
+  border: 1px solid rgba(212,175,55,0.35);
+  padding: 16px 20px; border-radius: 12px;
+  margin: 18px 0;
+  color: var(--gold-bright);
+  font-style: italic;
+  font-size: .93rem;
+  position: relative;
+}
+.golden-tip::before {
+  content: "✦ LỜI KHUYÊN VÀNG: ";
+  font-weight: 800;
+  color: var(--gold);
+  font-style: normal;
 }
 
-.person * {
-  vector-effect: non-scaling-stroke;
+/* ========== LIST ITEMS ========== */
+.item {
+  background: rgba(16,16,26,0.6);
+  border: 1px solid rgba(212,175,55,0.1);
+  border-radius: 10px;
+  padding: 12px 16px;
+  margin-bottom: 9px;
+  font-size: .92rem;
+  transition: all .25s;
+}
+.item:hover {
+  border-color: rgba(212,175,55,0.4);
+  background: rgba(24,24,36,0.8);
+  transform: translateX(3px);
+}
+.item .n { color: var(--gold); font-weight: 800; margin-right: 8px; }
+.item .t { color: #ffd9a0; font-weight: 600; }
+.item .r { color: #a4e8b0; }
+
+.group-title {
+  font-size: 1.05rem; font-weight: 700;
+  color: var(--gold-bright);
+  margin: 28px 0 14px;
+  padding: 10px 16px;
+  background: rgba(212,175,55,0.08);
+  border-radius: 10px;
+  border-left: 3px solid var(--gold);
 }
 
-.skin {
-  fill: #f3b38f;
-  stroke: #351f2b;
-  stroke-width: 3;
+/* ========== SEARCH ========== */
+.search-box { margin-bottom: 22px; }
+.search-box input {
+  width: 100%; padding: 13px 18px;
+  border-radius: 12px;
+  border: 1px solid rgba(212,175,55,0.25);
+  background: rgba(16,16,26,0.8);
+  color: var(--text);
+  font-size: .95rem; font-family: inherit;
+  backdrop-filter: blur(8px);
+  transition: .3s;
+}
+.search-box input:focus {
+  outline: none;
+  border-color: var(--gold);
+  box-shadow: 0 0 0 3px rgba(212,175,55,0.15);
 }
 
-.shirt {
-  fill: #5b5de6;
-  stroke: #351f2b;
-  stroke-width: 3;
+/* ========== BADGE LIST ========== */
+.badge-list { list-style: none; padding: 0; }
+.badge-list li {
+  padding: 11px 14px; margin-bottom: 8px;
+  background: rgba(16,16,26,0.6);
+  border: 1px solid rgba(212,175,55,0.12);
+  border-radius: 9px;
+  font-size: .92rem; color: #cdd1dd;
+  display: flex; align-items: flex-start; gap: 10px;
+  transition: .25s;
+}
+.badge-list li:hover {
+  border-color: rgba(212,175,55,0.4);
+  background: rgba(24,24,36,0.8);
+}
+.badge-list li .ic { color: var(--crimson); font-weight: 900; flex-shrink: 0; }
+.badge-list li .ic.good { color: var(--emerald); }
+.badge-list li .ic.gold { color: var(--gold); }
+
+/* ========== WEEK CARD ========== */
+.week {
+  background: linear-gradient(135deg, rgba(26,13,46,0.7), rgba(13,22,40,0.7));
+  backdrop-filter: blur(12px);
+  border-radius: 14px;
+  padding: 20px 22px;
+  margin-bottom: 16px;
+  border: 1px solid rgba(212,175,55,0.2);
+  transition: .3s;
+}
+.week:hover {
+  border-color: var(--gold);
+  transform: translateY(-2px);
+}
+.week h3 { color: var(--gold-bright); margin-bottom: 10px; font-size: 1.02rem; }
+
+/* ========== BIZ GRID ========== */
+.biz-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: 10px;
+}
+.biz-item {
+  background: rgba(16,16,26,0.6);
+  border: 1px solid rgba(212,175,55,0.12);
+  border-radius: 10px;
+  padding: 12px 14px;
+  font-size: .88rem;
+  transition: .25s;
+}
+.biz-item:hover {
+  border-color: var(--gold);
+  background: rgba(24,24,36,0.9);
+  transform: translateY(-2px);
+}
+.biz-item .n { color: var(--gold); font-weight: 800; margin-right: 6px; }
+.biz-item .name { color: var(--gold-bright); font-weight: 700; }
+.biz-item .desc { display: block; color: var(--text-muted); margin-top: 4px; font-size: .82rem; }
+
+/* ========== FOOTER ========== */
+footer {
+  text-align: center;
+  padding: 40px 20px 30px;
+  border-top: 1px solid rgba(212,175,55,0.15);
+  margin-top: 40px;
+  color: var(--text-muted);
+  font-size: .84rem;
+}
+footer span { color: var(--gold); font-weight: 700; }
+
+/* ========== SCROLLBAR ========== */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: #0a0a12; }
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--gold), var(--gold-deep));
+  border-radius: 4px;
 }
 
-.pants {
-  fill: #263653;
-  stroke: #351f2b;
-  stroke-width: 3;
-}
-
-.hair {
-  fill: #351f2b;
-}
-
-.pin {
-  fill: #ef3340;
-  stroke: #fff;
-  stroke-width: 2.5;
-}
-
-.pin-line {
-  stroke: #ef3340;
-  stroke-width: 2;
-  stroke-linecap: round;
-}
-
-@keyframes breathe {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-3px); }
+/* ========== RESPONSIVE ========== */
+@media(max-width:640px){
+  header { padding: 50px 15px 30px; }
+  header h1 { font-size: 1.7rem; letter-spacing: 1.5px; }
+  nav button { font-size: .72rem; padding: 7px 11px; }
+  .card { padding: 18px 18px; }
+  .card p { font-size: .9rem; }
+  .biz-grid { grid-template-columns: 1fr; }
+  .item { font-size: .88rem; padding: 10px 13px; }
 }
 </style>
-
+</head>
 <body>
-  <div class="circle"></div>
-  <svg class="person" viewBox="0 0 150 230" role="img" aria-label="Mô hình người 2D">
-    <!-- đầu và tóc -->
-    <circle class="skin" cx="75" cy="34" r="24"/>
-    <path class="hair" d="M51 31c2-22 44-31 50 3-8-7-15-9-23-8-8 1-16 5-27 5z"/>
-    <!-- thân -->
-    <path class="shirt" d="M57 64h36c9 0 18 7 22 17l9 28-22 7-5-18v45H53V98l-5 18-22-7 9-28c4-10 13-17 22-17z"/>
-    <!-- tay -->
-    <path class="skin" d="M35 83l-14 35c-2 5 1 10 6 11 4 1 8-1 10-6l14-32z"/>
-    <path class="skin" d="M115 83l14 35c2 5-1 10-6 11-4 1-8-1-10-6L99 91z"/>
-    <!-- chân -->
-    <path class="pants" d="M53 143h44l-3 46H72l-6-29-6 29H37z"/>
-    <path class="skin" d="M37 189h22v13H30c0-7 2-11 7-13z"/>
-    <path class="skin" d="M72 189h22c5 2 7 6 7 13H72z"/>
-    <!-- khuôn mặt -->
-    <circle cx="66" cy="35" r="2.5" fill="#351f2b"/>
-    <circle cx="84" cy="35" r="2.5" fill="#351f2b"/>
-    <path d="M68 46q7 6 14 0" fill="none" stroke="#351f2b" stroke-width="2" stroke-linecap="round"/>
-    <!-- điểm ghim đầu và bụng -->
-    <g aria-label="Điểm ghim đầu">
-      <circle class="pin" cx="75" cy="34" r="6"/>
-      <path class="pin-line" d="M75 24v20M65 34h20"/>
-    </g>
-    <g aria-label="Điểm ghim bụng">
-      <circle class="pin" cx="75" cy="112" r="6"/>
-      <path class="pin-line" d="M75 102v20M65 112h20"/>
-    </g>
-  </svg>
+
+<!-- ========== ANIMATED BACKGROUND ========== -->
+<div class="bg-layer"></div>
+<div class="aurora"></div>
+<div class="stars"></div>
+
+<!-- ========== HEADER ========== -->
+<header>
+  <div class="crown">👑</div>
+  <h1>ĐỈNH CAO NHÂN SINH</h1>
+  <div class="subtitle">✦ Tinh Hoa Bậc Thầy ✦</div>
+  <div class="golden-line"></div>
+  <p class="tagline">Giao tiếp · Triết học · Kinh doanh · Tư duy · Ứng xử · Lòng người · Quyền lực</p>
+</header>
+
+<!-- ========== NAV ========== -->
+<nav>
+  <button class="active" data-tab="giao-tiep">🗣 Giao Tiếp & Ăn Nói</button>
+  <button data-tab="tu-duy">🧠 Triết Học & Tư Duy</button>
+  <button data-tab="kinh-doanh">💰 Kinh Doanh Thực Chiến</button>
+  <button data-tab="ung-xu">🎯 Ứng Xử Tinh Hoa</button>
+  <button data-tab="long-nguoi">👁 Nhìn Người Năng Lực</button>
+  <button data-tab="quan-truong">🏛 Quan Trường & Quyền Lực</button>
+  <button data-tab="nghe-90">💵 90 Nghề Kiếm Tiền</button>
+  <button data-tab="lo-trinh">📅 Lộ Trình 52 Tuần</button>
+</nav>
+
+<main>
+
+<!-- ========== 1. GIAO TIẾP & ĂN NÓI ========== -->
+<section id="giao-tiep" class="active">
+  <h2>Giao Tiếp & Ăn Nói Đỉnh Cao</h2>
+  <p class="section-sub">Nói ít – thấm nhiều. Người khéo nói không nói nhiều, họ nói đúng lúc, đúng người, đúng cách.</p>
+
+  <div class="golden-tip">Người ta sẽ quên bạn nói gì, quên bạn làm gì, nhưng không bao giờ quên bạn khiến họ cảm thấy thế nào.</div>
+
+  <div class="card">
+    <h3><span class="num">1</span>Lắng nghe bằng cả trái tim – không chỉ bằng tai</h3>
+    <p>Người ta không yêu quý bạn vì bạn nói hay, mà vì bạn khiến họ cảm thấy được hiểu đến tận cùng. Khi lắng nghe, hãy gạt điện thoại xuống, nhìn vào mắt, gật đầu đúng lúc và đặt một câu hỏi đào sâu. Hãy để người khác nói 70%, bạn chỉ nói 30% – và 30% đó phải là những câu khiến họ muốn nói thêm. Người lắng nghe giỏi là người được nhớ lâu nhất, bởi vì giữa một thế giới ai cũng muốn nói, người biết nghe là báu vật.</p>
+    <span class="vidu">Vợ đi làm về kể sếp mắng. Đừng vội khuyên "Em nên thế này thế kia". Hãy ngồi xuống, nhìn mắt cô ấy: "Hôm nay em mệt lắm đúng không?" – bốn chữ đó quý hơn mọi lời khuyên.</span>
+    <span class="quote">"Nếu muốn tỏ ra thông minh, hãy học cách đặt câu hỏi. Nếu muốn tỏ ra khôn ngoan, hãy học cách im lặng."</span>
+  </div>
+
+  <div class="card">
+    <h3><span class="num">2</span>Ba giây im lặng – ba năm bình an</h3>
+    <p>Cảm xúc bốc lên chỉ trong 3 giây đầu, và 90% hối hận của đời người đến từ những câu nói trong 3 giây đó. Khi ai đó chạm vào lòng tự ái của bạn, hãy hít một hơi, đếm đến ba, rồi mới mở miệng. Ba giây đó không phải yếu đuối – đó là sức mạnh của người đã thuần phục được con thú bên trong. Người không kiểm soát được miệng mình, sẽ mất những thứ đắt giá nhất bằng đúng những lời rẻ tiền nhất.</p>
+    <span class="vidu">Sếp mắng trước cả phòng. Bạn đếm 1-2-3 rồi nói: "Dạ em ghi nhận, chiều em báo cáo lại anh." Tối về bạn viết đơn xin nghỉ – nhưng sáng mai bạn đọc lại và thấy mình đã đúng khi không phản ứng.</span>
+    <span class="quote">"Giữa kích thích và phản ứng có một khoảng trống. Trong khoảng trống đó nằm quyền tự do và sức mạnh của bạn." — Viktor Frankl</span>
+  </div>
+
+  <div class="card">
+    <h3><span class="num">3</span>Ba điều trước khi nói – cứu bạn khỏi 90% hối hận</h3>
+    <p>Trước khi mở miệng, hãy tự hỏi ba câu: "Có đúng không? Có cần không? Có tử tế không?" Nếu cả ba đều "có" – hãy nói. Nếu một trong ba là "không" – hãy im. Đây không phải công thức máy móc – đây là tấm lọc của người từng trải. Người không có tấm lọc này sẽ nói những điều đúng nhưng không cần, cần nhưng không đúng, hoặc đúng và cần nhưng lại nói không tử tế. Và tất cả những cuộc đời đổ vỡ đều bắt đầu từ những lời như thế.</p>
+    <span class="vidu">Vợ nấu ăn mặn. Bạn định nói "Em nấu mặn quá." Lọc qua 3 câu: Đúng – có. Cần – có. Tử tế – chưa. Đổi thành: "Em nêm nhạt hơn chút là anh ăn được hai bát luôn." Vừa thật, vừa khéo, vừa thương.</span>
+    <span class="quote">"Trước khi nói, hãy để lời nói đi qua ba cánh cổng: Có đúng không? Có cần không? Có tử tế không?" — Socrates</span>
+  </div>
+
+  <div class="card">
+    <h3><span class="num">4</span>Khen gián tiếp mạnh gấp đôi khen trực tiếp</h3>
+    <p>Khen qua người thứ ba: "Anh A nói cậu làm việc rất có tâm." Khi người thứ ba truyền lại lời khen của bạn, nó có sức nặng gấp đôi so với bạn khen thẳng. Vì lời khen thẳng dễ bị nghi ngờ là xã giao. Lời khen sau lưng thì người ta tin tuyệt đối – vì ai lại nói tốt sau lưng nếu không thật lòng? Đây là bí quyết của những bậc thầy giao tiếp. Họ không khen nhiều trước mặt – họ khen đúng một câu sau lưng, và để nó tự lan tỏa.</p>
+    <span class="vidu">Bạn khen với đồng nghiệp C: "Thằng B làm việc có tâm thật." Vài hôm sau B biết. B sẽ nhớ bạn cả đời – dù bạn chưa từng nói trực tiếp với B một lời khen nào.</span>
+    <span class="quote">"Lời khen sau lưng là lời khen đắt giá nhất, vì nó không cần người khen có mặt để bảo vệ nó."</span>
+  </div>
+
+  <div class="card">
+    <h3><span class="num">5</span>Đổi "nhưng" thành "và" – thay đổi cả cuộc đời</h3>
+    <p>"Em làm tốt, nhưng còn thiếu…" → chữ "nhưng" xóa sạch mọi lời khen trước đó. Thay vào đó: "Em làm tốt phần A, và mình cùng xem thêm phần B nhé." Nghe khác hoàn toàn. "Anh thông minh, nhưng anh lười" – người ta chỉ nhớ chữ "lười." "Anh thông minh, và nếu anh chăm hơn nữa thì sẽ rất đáng nể" – người ta nhớ cả hai. Chữ "nhưng" là con dao cắt đôi câu nói. Chữ "và" là cây cầu nối hai phần.</p>
+    <span class="vidu">Sếp nói với nhân viên: "Báo cáo em làm tốt, nhưng số liệu còn sai." Nhân viên chỉ nghe "sai". Nếu sếp nói: "Báo cáo em làm tốt, và mình cùng rà lại phần số liệu nhé." Nhân viên sẽ vui vẻ sửa và biết ơn sếp.</span>
+    <span class="quote">"Một chữ thay đổi cả câu. Một câu thay đổi cả mối quan hệ. Một mối quan hệ thay đổi cả cuộc đời."</span>
+  </div>
+
+  <div class="card">
+    <h3><span class="num">6</span>Câu mở đầu quyết định 80% cuộc trò chuyện</h3>
+    <p>"Tôi hiểu cảm giác của anh…" – câu này phá băng mọi cuộc trò chuyện khó. Thay vì "Anh sai rồi," hãy nói "Nếu ở vị trí anh, tôi cũng có thể nghĩ vậy…" – rồi mới nhẹ nhàng đưa ra góc nhìn khác. Câu mở đầu quyết định 80% kết quả. Mở đầu bằng đồng cảm – người ta mở lòng. Mở đầu bằng phán xét – người ta đóng cửa. Đây là bí quyết của các nhà đàm phán hàng đầu: không bao giờ bắt đầu bằng "tôi", luôn bắt đầu bằng "bạn" hoặc "chúng ta".</p>
+    <span class="vidu">Khách phàn nàn sản phẩm lỗi. Bạn không nói "Sản phẩm này không lỗi". Bạn nói: "Em hiểu cảm giác của anh khi nhận hàng chưa được như ý. Mình cùng xem lại nhé." Khách sẽ nguôi giận ngay.</span>
+    <span class="quote">"Được hiểu là món quà lớn nhất mà con người có thể trao cho nhau."</span>
+  </div>
+
+  <div class="card">
+    <h3><span class="num">7</span>Khi muốn góp ý – dùng câu hỏi, không dùng mệnh lệnh</h3>
+    <p>"Mình thấy có cách này, anh xem thử được không?" thay vì "Anh nên làm thế này." Câu hỏi cho họ quyền quyết định – họ dễ tiếp thu hơn. Câu mệnh lệnh tước đi quyền tự chủ – họ sẽ phản kháng, dù bạn đúng. Đây là nguyên tắc tâm lý cơ bản: con người không thích bị điều khiển, kể cả khi điều khiển đó vì lợi ích của họ. Người khéo góp ý là người khiến người khác tưởng rằng họ tự nghĩ ra giải pháp. Đó không phải thao túng – đó là tôn trọng trí tuệ người đối diện.</p>
+    <span class="vidu">Nhân viên làm sai quy trình. Đừng nói "Em phải làm theo đúng quy trình!" Hãy nói: "Nếu mình thử làm theo quy trình mới, em thấy có khó không?" – nhân viên sẽ tự giác làm đúng, vì đó là lựa chọn của họ.</span>
+    <span class="quote">"Người ta sẽ quên điều bạn nói, nhưng không bao giờ quên cách bạn khiến họ cảm thấy về chính mình."</span>
+  </div>
+
+  <div class="card">
+    <h3><span class="num">8</span>Giữ thể diện cho người khác – kể cả khi mình đúng</h3>
+    <p>Không ai muốn bị vạch trần trước đám đông, dù họ sai 100%. Khi bạn cho người ta lối thoát, bạn có một người bạn. Khi bạn dồn người ta vào góc tường, bạn có một kẻ thù nhớ đời. Người khôn khéo nói: "Có thể em hiểu nhầm, nhưng mình cùng xem lại nhé" thay vì "Anh sai rồi". Sự thật không cần phải đau đớn – chỉ có cái tôi của người nói mới cần. Bỏ cái tôi xuống, sự thật tự khắc được đón nhận.</p>
+    <span class="vidu">Đồng nghiệp copy sai số liệu. Bạn không nói trước phòng họp: "Cái này sai rồi!" mà nhắn tin riêng: "Chỗ này mình thấy hơi lệch, cậu check lại giúp mình nhé." Ai cũng vui, việc vẫn xong.</span>
+    <span class="quote">"Đừng bao giờ nói với người ta rằng họ sai. Hãy nói: 'Tôi có thể sai, chúng ta cùng xem lại nhé.'" — Dale Carnegie</span>
+  </div>
+
+  <div class="card">
+    <h3><span class="num">9</span>Nói ít – chọn từ đắt – để lại dư âm</h3>
+    <p>Người nói nhiều thường bị quên. Người nói ít mà sâu thường được nhớ. Hãy để mỗi câu bạn nói ra đều có trọng lượng – như giọt nước rơi xuống mặt hồ phẳng lặng, tạo ra những vòng sóng lan xa. Đừng nói để lấp khoảng trống – hãy nói để tạo giá trị. Trước khi nói một câu quan trọng, hãy tự hỏi: "Câu này có đáng để người ta nhớ 10 năm không?" Nếu không – hãy im.</p>
+    <span class="vidu">Trong cuộc họp, ai cũng nói 10 phút. Bạn chỉ nói 1 phút, nhưng là câu chốt: "Vậy chúng ta cần tập trung vào 3 việc: A, B, C." Cả phòng sẽ nhớ mỗi câu của bạn.</span>
+    <span class="quote">"Hãy nói để người khác muốn nghe tiếp. Đừng nói để người khác mong bạn dừng lại."</span>
+  </div>
+
+  <div class="card">
+    <h3><span class="num">10</span>Từ chối khéo – không làm mất lòng</h3>
+    <p>"Cảm ơn anh đã nghĩ đến em, nhưng em chưa sắp xếp được" – câu thần thánh. Từ chối việc – không từ chối người. Đừng nói "Không, em bận lắm" – nghe như đuổi khéo. Hãy nói "Em rất muốn nhưng tuần này em có việc gia đình, hẹn anh tuần sau nhé" – vừa từ chối vừa mở ra cơ hội. Người không biết từ chối sẽ sống cuộc đời của người khác. Người từ chối khéo sẽ sống cuộc đời của chính mình mà vẫn được mọi người yêu quý.</p>
+    <span class="vidu">Bạn bè rủ đi nhậu, bạn đang muốn ở nhà đọc sách. Đừng nói "Tao không thích nhậu." Hãy nói: "Tao đang có việc nhà, hẹn anh em tuần sau." – vừa giữ được mối quan hệ, vừa giữ được thời gian cho mình.</span>
+    <span class="quote">"Nói 'không' không có nghĩa là bạn ích kỷ. Nó có nghĩa là bạn đang bảo vệ những gì quan trọng nhất."</span>
+  </div>
+</section>
+
+<!-- ========== 2. TRIẾT HỌC & TƯ DUY ========== -->
+<section id="tu-duy">
+  <h2>Triết Học & Tư Duy Đỉnh Cao</h2>
+  <p class="section-sub">Triết học không phải để biết – mà để sống. Tư duy đúng biến người thường thành bậc thầy.</p>
+
+  <div class="golden-tip">Dù bạn nghĩ mình có thể hay không thể, bạn đều đúng. Tư duy quyết định số phận.</div>
+
+  <div class="card">
+    <h3><span class="num">1</span>Khắc Kỷ – Chia đôi thế giới: trong tầm tay và ngoài tầm tay</h3>
+    <p>Mọi nỗi khổ của con người đều đến từ việc cố kiểm soát thứ mình không kiểm soát được. Bạn không kiểm soát được thời tiết, người khác nghĩ gì, thị trường lên xuống. Nhưng bạn kiểm soát được thái độ, nỗ lực và cách phản ứng. Hãy viết ra giấy 2 cột mỗi sáng: một bên là điều bạn có thể làm hôm nay, một bên là điều bạn phải buông. Dồn 100% sức vào cột một, và 0% vào cột hai. Đó là tự do đích thực.</p>
+    <span class="vidu">Bạn nộp CV 50 công ty, chỉ 1 nơi gọi. Bạn không kiểm soát được họ có gọi hay không – nhưng bạn kiểm soát được việc trau dồi kỹ năng, mở rộng mạng lưới, và giữ tinh thần tích cực. Đó là cột một.</span>
+    <span class="quote">"Không phải sự việc làm bạn đau, mà là suy nghĩ của bạn về sự việc đó." — Epictetus</span>
+  </div>
+
+  <div class="card">
+    <h3><span class="num">2</span>Đạo Gia – Nước chảy đá mòn, mềm thắng cứng</h3>
+    <p>Răng cứng thì rụng trước, lưỡi mềm thì sống đến cuối đời. Đừng đối đầu trực diện với thứ lớn hơn bạn – hãy vòng qua. Đừng cố chứng minh mình đúng khi đối phương đang nóng giận – hãy chờ nước lặng. Nhẫn nhịn không phải hèn, mà là sức mạnh đang tích lũy. Người khôn ngoan nhất là người biết khi nào tiến, khi nào lùi, khi nào im lặng như mặt hồ phẳng lặng nhưng dưới sâu là cả một đại dương.</p>
+    <span class="vidu">Sếp cũ của bạn nói xấu bạn trong công ty mới. Bạn không thanh minh ầm ĩ. Ba năm sau, bạn lên chức giám đốc, còn sếp cũ vẫn ở vị trí đó. Nước chảy đá mòn.</span>
+    <span class="quote">"Thượng thiện nhược thủy – Điều thiện cao nhất giống như nước. Nước khéo làm lợi muôn vật mà không tranh." — Lão Tử</span>
+  </div>
+
+  <div class="card">
+    <h3><span class="num">3</span>Nhân quả – Gieo thói quen, gặt số phận</h3>
+    <p>Bạn không thể gieo thói quen xấu mà mong gặt cuộc đời tốt. Mọi thứ lớn lao trên đời đều bắt đầu từ những việc nhỏ lặp lại mỗi ngày. Đọc 10 trang sách mỗi ngày – sau 10 năm là 36.500 trang, đủ để thành chuyên gia một lĩnh vực. Tập thể dục 20 phút mỗi ngày – sau 10 năm là 1.200 giờ rèn luyện thân tâm. Số phận không phải là thứ xảy đến với bạn – mà là thứ bạn đang âm thầm xây mỗi ngày bằng những lựa chọn nhỏ bé.</p>
+    <span class="vidu">Mỗi sáng dậy sớm 5h, viết 500 chữ. Sau một năm, bạn có một cuốn sách. Sau ba năm, bạn có ba cuốn sách và một sự nghiệp viết lách.</span>
+    <span class="quote">"Gieo suy nghĩ, gặt hành động. Gieo hành động, gặt thói quen. Gieo thói quen, gặt tính cách. Gieo tính cách, gặt số phận."</span>
+  </div>
+
+  <div class="card">
+    <h3><span class="num">4</span>Nguyên tắc 80/20 – Tập trung vào ít mà chất</h3>
+    <p>80% kết quả đến từ 20% hành động. 80% doanh thu đến từ 20% khách hàng. 80% hạnh phúc đến từ 20% mối quan hệ. Người thành công không làm nhiều hơn – họ chọn lọc giỏi hơn. Mỗi sáng, hãy hỏi: "Việc nào hôm nay tạo ra phần lớn kết quả cho mình?" Rồi dồn toàn lực vào đó, còn lại hãy ủy thác, từ chối, hoặc bỏ. Đừng bận rộn – hãy hiệu quả. Bận rộn là dấu hiệu của người không biết mình muốn gì.</p>
+    <span class="vidu">Bạn có 100 khách nhưng chỉ 20 người mua thường xuyên. Thay vì chạy theo 80 người kia, hãy chăm sóc 20 người này thật tốt – doanh thu tăng gấp đôi mà công sức giảm một nửa.</span>
+    <span class="quote">"Hiệu quả là làm đúng việc. Hiệu suất là làm việc đúng cách." — Peter Drucker</span>
+  </div>
+
+  <div class="card">
+    <h3><span class="num">5</span>Tư duy phát triển – Sức mạnh của chữ "chưa"</h3>
+    <p>Người tư duy cố định nói: "Tôi không làm được." Người tư duy phát triển nói: "Tôi CHƯA làm được." Chỉ một chữ "chưa" – nhưng nó thay đổi toàn bộ cuộc đời. Nó biến thất bại thành bài học, biến giới hạn thành tạm thời, biến "tôi là kẻ thất bại" thành "tôi đang trên đường học hỏi." Người tư duy cố định sợ thất bại nên không dám thử. Người tư duy phát triển sợ không học được gì nên dám thử mọi thứ. Sự khác biệt đó, sau 10 năm, là cả một đại dương.</p>
+    <span class="vidu">Bạn thi trượt đại học. Người tư duy cố định: "Tôi dốt." Người tư duy phát triển: "Tôi chưa có phương pháp học đúng." Cùng một sự việc – hai số phận hoàn toàn khác nhau.</span>
+    <span class="quote">"Dù bạn nghĩ mình có thể hay không thể, bạn đều đúng." — Henry Ford</span>
+  </div>
+
+  <div class="card">
+    <h3><span class="num">6</span>Tư duy phản biện – Đừng tin ngay, hãy hỏi trước</h3>
+    <p>Trước khi tin bất cứ điều gì, hãy hỏi ba câu: Nguồn ở đâu? Động cơ của người nói là gì? Có góc nhìn khác không? Đây là tấm khiên bảo vệ bạn khỏi tin giả, lừa đảo, thao túng tâm lý. Người không có tư duy phản biện sẽ bị dắt mũi bởi bất kỳ ai nói to hơn, khóc lóc giỏi hơn, hoặc hứa hẹn nhiều hơn. Người có tư duy phản biện không tin vào cảm xúc – họ tin vào bằng chứng. Sự thật luôn đứng vững trước câu hỏi – chỉ có dối trá mới sợ bị hỏi.</p>
+    <span class="vidu">Ai đó gửi link "đầu tư 10 triệu, sau 1 tháng nhận 50 triệu". Trước khi xuống tiền, hỏi 3 câu: Lợi nhuận từ đâu ra? Ai đứng sau? Tại sao họ cần tiền của bạn? 90% câu trả lời sẽ là bịa.</span>
+    <span class="quote">"Điều nguy hiểm nhất không phải là kẻ nói dối, mà là người tin vào lời nói dối mà không hỏi một câu nào."</span>
+  </div>
+
+  <div class="card">
+    <h3><span class="num">7</span>Nguyên tắc gương soi – Thế giới là tấm gương của bạn</h3>
+    <p>Bạn ghét ở người khác điều gì? Rất có thể đó là điều bạn chưa chấp nhận ở chính mình. Người hay nói "sao nó kiêu thế" thường đang thiếu tự tin. Người hay chê "sao nó tham thế" thường đang khao khát thứ đó. Thế giới bên ngoài chỉ là tấm gương phản chiếu thế giới bên trong. Muốn thay đổi người khác, hãy soi gương trước. Muốn thay đổi hoàn cảnh, hãy thay đổi tâm trí trước.</p>
+    <span class="vidu">Bạn bực mình vì đồng nghiệp hay chỉ trích. Nhìn lại, bạn cũng hay chỉ trích người khác. Khi bạn bắt đầu khen nhiều hơn, bạn sẽ thấy đồng nghiệp cũng bắt đầu khen bạn.</span>
+    <span class="quote">"Hôm qua tôi thông minh nên tôi muốn thay đổi thế giới. Hôm nay tôi khôn ngoan nên tôi thay đổi chính mình." — Rumi</span>
+  </div>
+
+  <div class="card">
+    <h3><span class="num">8</span>Tư duy dài hạn – Nghĩ 10 năm, sống từng ngày</h3>
+    <p>Kẻ thắng là kẻ nghĩ 10 năm. Kẻ thua là kẻ nghĩ 10 ngày. Nhưng nghĩ dài hạn không có nghĩa là sống trong tương lai – mà là hành động mỗi ngày như thể tương lai đó chắc chắn xảy ra. Hôm nay bạn học 1 giờ – 10 năm sau bạn là chuyên gia. Hôm nay bạn tiết kiệm 10% thu nhập – 10 năm sau bạn có tự do tài chính. Người thành công không có phép màu – họ chỉ có một bí quyết mà ai cũng biết nhưng ít ai làm: kiên trì lặp lại điều đúng mỗi ngày.</p>
+    <span class="vidu">Hai người cùng 25 tuổi. Một người mỗi tối xem phim 3 tiếng. Một người mỗi tối học 1 tiếng. 10 năm sau, người thứ hai có nghề tay trái thu nhập gấp 3 lương chính.</span>
+    <span class="quote">"Con người đánh giá quá cao những gì họ có thể làm trong một năm, và quá thấp những gì họ có thể làm trong mười năm." — Jim Rohn</span>
+  </div>
+</section>
+
+<!-- ========== 3. KINH DOANH THỰC CHIẾN ========== -->
+<section id="kinh-doanh">
+  <h2>Kinh Doanh Thực Chiến</h2>
+  <p class="section-sub">Kinh doanh đỉnh cao không phải kỹ thuật – mà là triết lý sống được chuyển hóa thành hành động.</p>
+
+  <div class="golden-tip">Người ta sẽ quên điều bạn nói, quên điều bạn làm, nhưng không bao giờ quên cảm giác bạn mang lại. Bán cảm giác, không bán sản phẩm.</div>
+
+  <div class="card">
+    <h3><span class="num">1</span>Bán niềm tin – không bán sản phẩm</h3>
+    <p>Khách hàng mua vì cảm xúc, rồi biện minh bằng lý trí. Họ không mua một chiếc xe – họ mua cảm giác tự do. Không mua mỹ phẩm – họ mua niềm tin mình đẹp hơn. Không mua khóa học – họ mua hình ảnh con người tương lai của chính mình. Vì vậy, đừng nói về thông số sản phẩm – hãy kể câu chuyện về cuộc đời khách hàng sau khi dùng nó. Người bán hàng giỏi nhất không bán – họ kể chuyện. Và câu chuyện hay nhất là câu chuyện khiến khách hàng tự thấy mình trong đó.</p>
+    <span class="vidu">Bán khóa học tiếng Anh: đừng nói "1000 từ vựng, 50 bài giảng". Hãy nói: "Sau 6 tháng, bạn sẽ tự tin đứng trước sếp nước ngoài thuyết trình – và có thể được thăng chức." Cùng sản phẩm, khác câu chuyện, khác doanh thu.</span>
+    <span class="quote">"Người ta sẽ quên điều bạn nói, quên điều bạn làm, nhưng không bao giờ quên cảm giác bạn mang lại." — Maya Angelou</span>
+  </div>
+
+  <div class="card">
+    <h3><span class="num">2</span>Đàm phán – Ai nắm thời gian, người đó nắm quyền</h3>
+    <p>Trong đàm phán, bên nào vội – bên đó thua. Im lặng đúng lúc là đòn mạnh nhất mà không tốn một xu. Hãy để đối phương nói trước, ra giá trước, đưa lý do trước – rồi bạn mới mở miệng. Khi họ nói xong, hãy im lặng 5 giây. Sự im lặng đó khiến họ tự bổ sung, tự hạ giá, tự lộ điểm yếu. Người không chịu được im lặng là người sẽ nhượng bộ trước. Hãy học cách ngồi yên như núi, nhìn như biển, và chỉ ra tay khi đối phương đã tự bộc lộ hết quân bài.</p>
+    <span class="vidu">Bạn đi mua xe, người bán hỏi "Anh có muốn mua luôn hôm nay không?". Bạn im lặng 5 giây, rồi nói: "Tôi đang xem thêm vài chỗ nữa." Lập tức giá giảm 5%. Sự im lặng của bạn vừa tiết kiệm 5% – không nói một câu nào.</span>
+    <span class="quote">"Trong đàm phán, người kiên nhẫn nhất luôn là người chiến thắng." — Chris Voss</span>
+  </div>
+
+  <div class="card">
+    <h3><span class="num">3</span>Lãnh đạo – Lấy uy tín thay quyền lực</h3>
+    <p>Quyền lực khiến người ta sợ và làm theo khi bạn có mặt. Uy tín khiến người ta kính và làm theo ngay cả khi bạn vắng mặt. Người lãnh đạo đỉnh cao không ra lệnh – họ vẽ ra tầm nhìn đủ đẹp để người khác tự nguyện bước vào. Họ không nói "hãy làm đi" – họ nói "chúng ta cùng xây điều này". Khi có công, họ đứng sau. Khi có tội, họ đứng trước. Đó là bí quyết của những người được đi theo cả đời.</p>
+    <span class="vidu">Công ty làm ăn thua lỗ, sếp trưởng tự cắt lương mình 50% trước khi cắt lương nhân viên. Nhân viên nhìn thấy – và ở lại. Đó là uy tín không mua được bằng tiền.</span>
+    <span class="quote">"Người lãnh đạo giỏi không phải là người làm mọi thứ, mà là người khiến mọi người muốn làm mọi thứ."</span>
+  </div>
+
+  <div class="card">
+    <h3><span class="num">4</span>Warren Buffett – Đơn giản và kiên nhẫn</h3>
+    <p>Buffett không thắng vì thông minh hơn người – ông thắng vì kiên nhẫn hơn người. Ông ngồi chờ 10 năm để mua đúng thứ mình hiểu, giá đúng thứ mình muốn. Trong khi cả thế giới xoay như chong chóng, ông ngồi đọc sách 5 tiếng mỗi ngày. Bài học: sự vĩ đại không đến từ những hành động hào nhoáng – mà từ việc làm những việc đơn giản, đều đặn, kiên nhẫn suốt nhiều thập kỷ.</p>
+    <span class="vidu">Năm 2008, khủng hoảng tài chính, ai cũng bán tháo cổ phiếu. Buffett mua vào. 10 năm sau, khoản đầu tư đó tăng 300%. Không phải vì ông đoán đúng đỉnh đáy – mà vì ông kiên nhẫn chờ 10 năm.</span>
+    <span class="quote">"Thị trường chứng khoán là công cụ chuyển tiền từ kẻ thiếu kiên nhẫn sang người kiên nhẫn." — Warren Buffett</span>
+  </div>
+
+  <div class="card">
+    <h3><span class="num">5</span>Steve Jobs – Tập trung là nói KHÔNG</h3>
+    <p>Người ta nghĩ tập trung là nói CÓ với một việc. Jobs hiểu ngược lại: tập trung là nói KHÔNG với 100 điều hay, để dồn sức cho 1 điều xuất sắc. Khi ông quay lại Apple, công ty có 350 sản phẩm – ông cắt còn 10. Không phải vì ông không thích nhiều thứ – mà vì ông biết: sự xuất sắc không đến từ số lượng, mà từ cường độ. Một sản phẩm làm đến tận cùng cảm xúc, hơn 100 sản phẩm làng nhàng.</p>
+    <span class="vidu">Bạn có 5 ý tưởng kinh doanh. Thay vì làm cả 5 và thất bại cả 5, hãy chọn 1, dồn 100% sức. Người thắng không phải người có nhiều ý tưởng – mà là người chọn đúng 1 và đi đến cùng.</span>
+    <span class="quote">"Tập trung không phải là nói CÓ với điều bạn cần làm, mà là nói KHÔNG với 100 điều hay ho khác." — Steve Jobs</span>
+  </div>
+
+  <div class="card">
+    <h3><span class="num">6</span>Jack Ma – Nghèo thì học, giàu thì khiêm</h3>
+    <p>Jack Ma từng bị từ chối 30 lần xin việc, từng bị Harvard từ chối 10 lần. Nhưng ông không thay đổi ước mơ – chỉ thay đổi cách tiếp cận. Bài học lớn nhất của ông không phải "làm giàu", mà là "làm người": khi nghèo, hãy học – vì kiến thức là thứ không ai lấy được. Khi giàu, hãy khiêm – vì cái tôi là thứ dễ mất nhất. Đỉnh cao không phải là đứng trên người khác – mà là đứng vững trên chính mình, giữa bao thăng trầm mà không đổi bản tâm.</p>
+    <span class="vidu">Khi bạn kiếm được 100 triệu đầu tiên, hãy vẫn đi xe máy cũ, vẫn ăn cơm bình dân với nhân viên. Người ta sẽ kính trọng bạn vì con người bạn, không phải vì ví tiền của bạn.</span>
+    <span class="quote">"Hôm nay khó khăn, ngày mai còn khó khăn hơn, nhưng ngày kia sẽ là ánh nắng mặt trời. Hầu hết người ta chết vào chiều ngày mai." — Jack Ma</span>
+  </div>
+
+  <div class="card">
+    <h3><span class="num">7</span>10 Tinh Túy Kinh Doanh Cần Nhớ Suốt Đời</h3>
+    <ul class="badge-list">
+      <li><span class="ic gold">✦</span><strong>Tiền đến từ giải quyết vấn đề:</strong> Vấn đề càng lớn, tiền càng nhiều. Đừng tìm cách kiếm tiền – hãy tìm cách giúp người.</li>
+      <li><span class="ic gold">✦</span><strong>Đừng bán thứ bạn có – bán thứ họ cần:</strong> Người ta không mua khoan 5mm, họ mua lỗ khoan 5mm.</li>
+      <li><span class="ic gold">✦</span><strong>Khách cũ rẻ hơn khách mới 5 lần:</strong> Giữ khách cũ tốt hơn tìm khách mới. Đừng bỏ rơi người đã tin bạn.</li>
+      <li><span class="ic gold">✦</span><strong>Đừng cạnh tranh bằng giá – cạnh tranh bằng giá trị:</strong> Giá thấp nhất sẽ luôn có người thấp hơn. Giá trị thì không.</li>
+      <li><span class="ic gold">✦</span><strong>Tiền không phải mục tiêu – là kết quả:</strong> Kẻ theo đuổi tiền sẽ thất bại. Kẻ theo đuổi giá trị sẽ có tiền.</li>
+      <li><span class="ic gold">✦</span><strong>Mọi cuộc đàm phán đều có điểm cân bằng:</strong> Đừng cố thắng 100%. Thắng 60-40 để cả hai còn chơi tiếp.</li>
+      <li><span class="ic gold">✦</span><strong>Uy tín xây 10 năm, mất 1 giây:</strong> Một lần bán hàng dối, cả đời mất khách. Đừng đánh đổi.</li>
+      <li><span class="ic gold">✦</span><strong>Đừng cố làm tất cả - hãy làm tốt nhất một thứ:</strong> Chuyên môn hóa là con đường ngắn nhất đến tự do tài chính.</li>
+      <li><span class="ic gold">✦</span><strong>Đầu tư vào bản thân là lãi nhất:</strong> Sách 200k có thể đổi đời. Khóa học 5tr có thể sinh 50tr.</li>
+      <li><span class="ic gold">✦</span><strong>Đừng chờ đủ – hãy bắt đầu từ những gì có:</strong> Kẻ chờ đủ điều kiện sẽ chờ cả đời. Kẻ bắt đầu sẽ học được dọc đường.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ========== 4. ỨNG XỬ TINH HOA ========== -->
+<section id="ung-xu">
+  <h2>Ứng Xử Tinh Hoa – 40 Tình Huống Đời Thực</h2>
+  <p class="section-sub">Mỗi câu là một tình huống + cách xử lý thông minh. Học thuộc – không bao giờ bị động.</p>
+
+  <div class="search-box">
+    <input type="text" id="searchUX" placeholder="🔍 Tìm nhanh (vd: sếp, vợ, tiền, bạn...)">
+  </div>
+
+  <div id="listUX">
+
+    <div class="group-title">👨‍👩‍👧 GIA ĐÌNH</div>
+    <div class="item"><span class="n">1.</span><span class="t">Bố mẹ cãi nhau:</span> <span class="r">Không chọn phe. "Con thương cả hai" rồi ra ngoài 30 phút.</span></div>
+    <div class="item"><span class="n">2.</span><span class="t">Mẹ chồng chê:</span> <span class="r">"Con còn phải học mẹ nhiều, mẹ chỉ con với" – biến chê thành gần gũi.</span></div>
+    <div class="item"><span class="n">3.</span><span class="t">Con nói dối:</span> <span class="r">"Mẹ biết con sợ nên mới nói dối. Mẹ cần sự thật để giúp con."</span></div>
+    <div class="item"><span class="n">4.</span><span class="t">Anh em tranh tài sản:</span> <span class="r">"Tiền hết, anh em còn nhau cả đời. Chia đều, ai khó giúp thêm."</span></div>
+    <div class="item"><span class="n">5.</span><span class="t">Vợ nghi ngoại tình:</span> <span class="r">"Anh hiểu em lo. Anh sẽ minh bạch để em yên tâm." – hành động hơn lời.</span></div>
+    <div class="item"><span class="n">6.</span><span class="t">Em vay không trả:</span> <span class="r">"Anh cho em lần này. Lần sau anh không cho vay – để em tự lập."</span></div>
+    <div class="item"><span class="n">7.</span><span class="t">Mẹ vợ can thiệp:</span> <span class="r">"Con cảm ơn mẹ, nhưng vợ chồng con muốn tự quyết để trưởng thành ạ."</span></div>
+    <div class="item"><span class="n">8.</span><span class="t">Con muốn bỏ học:</span> <span class="r">"Con kể mẹ nghe, điều gì khiến con muốn bỏ?" – nghe trước, khuyên sau.</span></div>
+
+    <div class="group-title">💑 TÌNH YÊU</div>
+    <div class="item"><span class="n">9.</span><span class="t">Người yêu đọc tin nhắn:</span> <span class="r">"Anh hiểu em lo. Nhưng tin nhắn là riêng tư. Cần gì em hỏi thẳng anh."</span></div>
+    <div class="item"><span class="n">10.</span><span class="t">"Chia tay là tao tự tử":</span> <span class="r">Thao túng. "Anh không thể lấy mạng mình để giữ em. Em sẽ tìm người hỗ trợ."</span></div>
+    <div class="item"><span class="n">11.</span><span class="t">Gia đình người yêu phản đối:</span> <span class="r">"Anh không cần em chọn giữa anh và gia đình. Mình cùng chứng minh."</span></div>
+    <div class="item"><span class="n">12.</span><span class="t">Vợ chồng cãi nhau vì con:</span> <span class="r">"Mình đều thương con. Mình bàn cách tốt nhất, đừng tranh đúng sai."</span></div>
+
+    <div class="group-title">👥 BẠN BÈ</div>
+    <div class="item"><span class="n">13.</span><span class="t">Bạn thân vay không trả:</span> <span class="r">"Mình cần tiền đó, cậu sắp xếp trả nhé." – nhắc 2 lần, sau đó thôi.</span></div>
+    <div class="item"><span class="n">14.</span><span class="t">Bạn thân nói xấu:</span> <span class="r">Gặp riêng: "Cậu có gì không hài lòng thì nói thẳng với mình."</span></div>
+    <div class="item"><span class="n">15.</span><span class="t">Bạn nhờ đứng tên vay:</span> <span class="r">"Tao thương mày, nhưng không đứng tên được. Tao giúp được bao nhiêu thì giúp."</span></div>
+    <div class="item"><span class="n">16.</span><span class="t">Bạn phản bội:</span> <span class="r">"Tao không giận, nhưng từ nay chỉ là người quen." – buông, không oán.</span></div>
+
+    <div class="group-title">💼 CÔNG VIỆC – ĐỒNG NGHIỆP</div>
+    <div class="item"><span class="n">17.</span><span class="t">Đồng nghiệp cướp công:</span> <span class="r">Không cãi trước phòng. Gửi email: "Em báo cáo phần việc em đã làm."</span></div>
+    <div class="item"><span class="n">18.</span><span class="t">Sếp giao việc ngoài chuyên môn:</span> <span class="r">"Dạ em sẽ cố, nhưng em chưa có kinh nghiệm. Anh cho em thêm thời gian/hỗ trợ."</span></div>
+    <div class="item"><span class="n">19.</span><span class="t">Đồng nghiệp nói xấu:</span> <span class="r">Không đối đầu. Làm việc tốt, tử tế. Thời gian trả lời.</span></div>
+    <div class="item"><span class="n">20.</span><span class="t">Bị mời họp không lý do:</span> <span class="r">"Anh cho em xin agenda để em chuẩn bị ạ."</span></div>
+    <div class="item"><span class="n">21.</span><span class="t">Sếp mắng trước đông người:</span> <span class="r">Đếm 1-2-3: "Dạ em ghi nhận, em sửa." Tối viết bài học.</span></div>
+    <div class="item"><span class="n">22.</span><span class="t">Xin tăng lương:</span> <span class="r">"Em đã làm A, B, C. Em đề xuất mức lương mới là X." – số liệu, không cảm xúc.</span></div>
+    <div class="item"><span class="n">23.</span><span class="t">Đồng nghiệp hỏi lương:</span> <span class="r">Cười: "Đủ sống thôi, cậu lo giúp mình à?"</span></div>
+    <div class="item"><span class="n">24.</span><span class="t">Sếp thân nhưng vượt giới hạn:</span> <span class="r">"Em quý anh, nhưng em cần giữ giới hạn chuyên môn." – nếu tiếp, báo HR.</span></div>
+
+    <div class="group-title">👔 SẾP & CẤP TRÊN</div>
+    <div class="item"><span class="n">25.</span><span class="t">Sếp rủ nhậu, không muốn:</span> <span class="r">"Dạ em cảm ơn, tối nay em có việc gia đình. Hẹn anh lần khác."</span></div>
+    <div class="item"><span class="n">26.</span><span class="t">Sếp giao việc thấy sai:</span> <span class="r">Nói riêng: "Anh cho em góp ý. Nếu làm thế này, có rủi ro A, B."</span></div>
+    <div class="item"><span class="n">27.</span><span class="t">Sếp đưa phong bì:</span> <span class="r">"Em cảm ơn anh, nhưng em làm đúng quy trình là được ạ."</span></div>
+    <div class="item"><span class="n">28.</span><span class="t">Sếp nói "tùy em" không vui:</span> <span class="r">"Dạ em thấy phương án A hợp lý hơn, em xin phép làm A."</span></div>
+    <div class="item"><span class="n">29.</span><span class="t">Sếp sai rõ ràng:</span> <span class="r">Nói riêng: "Em thấy số liệu hơi khác. Anh xem lại giúp em." – không vạch trần.</span></div>
+
+    <div class="group-title">💵 TIỀN BẠC</div>
+    <div class="item"><span class="n">30.</span><span class="t">Bị rủ đầu tư siêu lợi nhuận:</span> <span class="r">Hỏi 3 câu: Lãi từ đâu? Ai bảo lãnh? Pháp lý ra sao?</span></div>
+    <div class="item"><span class="n">31.</span><span class="t">Nhờ đứng tên vay ngân hàng:</span> <span class="r">"Mình không đứng tên được. Giúp được phần nhỏ thì giúp."</span></div>
+    <div class="item"><span class="n">32.</span><span class="t">Bị đòi nợ dù không vay:</span> <span class="r">Yêu cầu giấy tờ. Bị đe dọa → gọi công an. Không run.</span></div>
+    <div class="item"><span class="n">33.</span><span class="t">Trúng số/nhận tiền lớn:</span> <span class="r">Không khoe. Chia 50% tiết kiệm, 30% tài sản, 20% từ thiện.</span></div>
+    <div class="item"><span class="n">34.</span><span class="t">Người thân nợ cờ bạc:</span> <span class="r">Không trả nợ. "Mình thương, nhưng không nuôi tật xấu."</span></div>
+
+    <div class="group-title">🌍 XÃ HỘI – MẠNG XÃ HỘI</div>
+    <div class="item"><span class="n">35.</span><span class="t">Bị chửi trên mạng:</span> <span class="r">Chụp ảnh → report → không đối đáp. Nặng thì gửi công an.</span></div>
+    <div class="item"><span class="n">36.</span><span class="t">Bị gọi "công an" đòi tiền:</span> <span class="r">Cúp máy. Gọi 113 xác minh. Công an thật không đòi tiền qua điện thoại.</span></div>
+    <div class="item"><span class="n">37.</span><span class="t">Người lạ nhờ trông đồ:</span> <span class="r">"Em xin lỗi, em không trông được." – có thể là chiêu lừa.</span></div>
+    <div class="item"><span class="n">38.</span><span class="t">Bị va quệt xe, gây sự:</span> <span class="r">Bình tĩnh, gọi công an, chụp ảnh. Không cãi, không đánh.</span></div>
+    <div class="item"><span class="n">39.</span><span class="t">Bị réo tên trong drama:</span> <span class="r">Im lặng 48h. Nếu vô can: "Tôi xin phép không bình luận."</span></div>
+    <div class="item"><span class="n">40.</span><span class="t">Phải chọn giữa tiền và đạo đức:</span> <span class="r">Luôn chọn đạo đức. Tiền mất kiếm lại được, nhân cách mất là mất mãi.</span></div>
+
+  </div>
+</section>
+
+<!-- ========== 5. NHÌN NGƯỜI NĂNG LỰC ========== -->
+<section id="long-nguoi">
+  <h2>Nghệ Thuật Nhìn Người Năng Lực</h2>
+  <p class="section-sub">Người giỏi không cần nói nhiều – hành vi, phản ứng và cách họ xử lý khó khăn sẽ lộ ra tất cả.</p>
+
+  <div class="golden-tip">Đừng nghe người ta nói về người trên – hãy nghe họ nói về người dưới. Đây là cách nhìn người chính xác nhất.</div>
+
+  <div class="card">
+    <h3><span class="num">1</span>20 Dấu Hiệu Người CÓ Năng Lực Thật</h3>
+    <ul class="badge-list">
+      <li><span class="ic good">✓</span>Hỏi câu hỏi sâu – không hỏi để khoe hiểu biết mà để hiểu thật.</li>
+      <li><span class="ic good">✓</span>Lắng nghe 70% – nói 30% nhưng câu nào chắc câu đó.</li>
+      <li><span class="ic good">✓</span>Dám nói "tôi không biết" – người giỏi thật sự không sợ mất mặt.</li>
+      <li><span class="ic good">✓</span>Nói về kết quả, không nói về quá trình vất vả.</li>
+      <li><span class="ic good">✓</span>Đúng hẹn – coi thời gian người khác như thời gian mình.</li>
+      <li><span class="ic good">✓</span>Không khoe thành tích – để người khác tự kể về họ.</li>
+      <li><span class="ic good">✓</span>Giữ lời hứa nhỏ – vì người giỏi coi trọng chữ tín từ việc bé nhất.</li>
+      <li><span class="ic good">✓</span>Phản ứng bình tĩnh khi bị chê – không tự ái, không cãi.</li>
+      <li><span class="ic good">✓</span>Đưa ra giải pháp, không chỉ nêu vấn đề.</li>
+      <li><span class="ic good">✓</span>Nhận sai nhanh – "Tôi sai, tôi sửa" là câu cửa miệng.</li>
+      <li><span class="ic good">✓</span>Đối xử tử tế với người phục vụ, bảo vệ, tài xế.</li>
+      <li><span class="ic good">✓</span>Không nói xấu người vắng mặt – dấu hiệu vàng.</li>
+      <li><span class="ic good">✓</span>Kiên nhẫn với người chậm hiểu – không tỏ ra khinh thường.</li>
+      <li><span class="ic good">✓</span>Có nguyên tắc rõ ràng – biết mình không làm gì, dù được lợi.</li>
+      <li><span class="ic good">✓</span>Học hỏi từ người giỏi hơn – không ghen tị, không đố kỵ.</li>
+      <li><span class="ic good">✓</span>Chủ động nhận việc khó – không chờ được giao.</li>
+      <li><span class="ic good">✓</span>Giữ bình tĩnh khi bị dồn ép – không phản ứng cảm xúc.</li>
+      <li><span class="ic good">✓</span>Đầu tư vào bản thân – đọc sách, học khóa, tập thể dục đều đặn.</li>
+      <li><span class="ic good">✓</span>Biết nói "không" – không làm vừa lòng tất cả mọi người.</li>
+      <li><span class="ic good">✓</span>Đứng về phía sự thật – kể cả khi bất lợi cho mình.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h3><span class="num">2</span>20 Dấu Hiệu Người YẾU KÉM – KÉM NĂNG LỰC</h3>
+    <ul class="badge-list">
+      <li><span class="ic">✗</span>Nói nhiều – khoe hiểu biết, kể thành tích không được hỏi.</li>
+      <li><span class="ic">✗</span>Không dám nhận sai – luôn đổ lỗi hoàn cảnh, người khác.</li>
+      <li><span class="ic">✗</span>Khoe tiền, khoe quan hệ – nhưng không có kết quả thật.</li>
+      <li><span class="ic">✗</span>Hứa nhiều, làm ít – nói "để tao lo" rồi biến mất.</li>
+      <li><span class="ic">✗</span>Nói xấu người khác sau lưng – đặc biệt là nói xấu sếp.</li>
+      <li><span class="ic">✗</span>Đối xử khác nhau với người trên và người dưới.</li>
+      <li><span class="ic">✗</span>Luôn tỏ ra bận rộn nhưng không có kết quả.</li>
+      <li><span class="ic">✗</span>Sợ việc khó – nhận việc dễ, đẩy việc khó cho người khác.</li>
+      <li><span class="ic">✗</span>Ghen tị với người giỏi hơn – tìm cách hạ bệ, không học hỏi.</li>
+      <li><span class="ic">✗</span>Trễ hẹn, quên deadline, không coi trọng thời gian người khác.</li>
+      <li><span class="ic">✗</span>Nói lý thuyết nhiều – không có ví dụ, không có kinh nghiệm thật.</li>
+      <li><span class="ic">✗</span>Không dám nói "tôi không biết" – bịa ra để tỏ ra hiểu.</li>
+      <li><span class="ic">✗</span>Thay đổi quan điểm liên tục – ai nói gì cũng nghe theo.</li>
+      <li><span class="ic">✗</span>Không có nguyên tắc – vì lợi sẵn sàng làm mọi thứ.</li>
+      <li><span class="ic">✗</span>Than vãn nhiều – nhưng không làm gì để thay đổi.</li>
+      <li><span class="ic">✗</span>Phản ứng cảm xúc khi bị góp ý – tự ái, giận, cãi.</li>
+      <li><span class="ic">✗</span>Đổ lỗi cho "số phận", "thời thế", "người khác".</li>
+      <li><span class="ic">✗</span>Thích tranh cãi để thắng – không phải để tìm sự thật.</li>
+      <li><span class="ic">✗</span>Không bao giờ đọc sách, không học gì mới – nhưng tự tin mình giỏi.</li>
+      <li><span class="ic">✗</span>Đánh giá thấp người khác – luôn coi mình giỏi hơn.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h3><span class="num">3</span>10 Câu Hỏi Vàng Để Test Năng Lực Người Đối Diện</h3>
+    <ul class="badge-list">
+      <li><span class="ic gold">?</span>"Việc khó nhất bạn từng làm? Bạn vượt qua thế nào?" – người giỏi kể chi tiết, người kém kể chung chung.</li>
+      <li><span class="ic gold">?</span>"Lần gần nhất bạn sai? Học được gì?" – người kém không nhớ, hoặc nói "tôi ít khi sai".</li>
+      <li><span class="ic gold">?</span>"Bạn đang học gì mới?" – người kém: "Tôi bận lắm", người giỏi kể vanh vách.</li>
+      <li><span class="ic gold">?</span>"Bạn giỏi nhất điều gì? Yếu nhất điều gì?" – người kém kể toàn điểm mạnh.</li>
+      <li><span class="ic gold">?</span>"5 năm nữa bạn muốn ở đâu?" – người kém: "Chưa biết", người giỏi có kế hoạch A, B, C.</li>
+      <li><span class="ic gold">?</span>"Bạn đọc sách gì gần đây?" – người kém im lặng, người giỏi kể 2-3 cuốn.</li>
+      <li><span class="ic gold">?</span>"Ai giỏi nhất trong nhóm này?" – người giỏi kể được tên + lý do, người kém: "Tôi không để ý."</li>
+      <li><span class="ic gold">?</span>"Bạn đã bao giờ thất bại chưa?" – người giỏi kể 1 câu chuyện, người kém: "Chưa bao giờ."</li>
+      <li><span class="ic gold">?</span>"Bạn nghĩ gì về tiền?" – người giỏi nói công cụ + trách nhiệm, người kém nói mua sắm, hưởng thụ.</li>
+      <li><span class="ic gold">?</span>"Bạn đã từ chối cơ hội nào vì nguyên tắc?" – người kém không có câu trả lời, người giỏi có ít nhất 1 ví dụ.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h3><span class="num">4</span>8 CẤP ĐỘ Năng Lực – Nhìn 5 Phút Biết Ngay</h3>
+    <ul class="badge-list">
+      <li><span class="ic gold">①</span><strong>Cấp 1 – Nói nhiều, làm ít:</strong> Khoe khắp nơi, hứa hẹn lung tung. Tránh xa.</li>
+      <li><span class="ic gold">②</span><strong>Cấp 2 – Nói ít, làm ít:</strong> Ngồi im, không đóng góp. Không hại nhưng không giúp.</li>
+      <li><span class="ic gold">③</span><strong>Cấp 3 – Nói ít, làm theo:</strong> Chỉ làm khi được giao, không chủ động. Nhân viên bình thường.</li>
+      <li><span class="ic gold">④</span><strong>Cấp 4 – Nói ít, làm nhiều:</strong> Chủ động, đáng tin. Nhân viên giỏi – cần giữ.</li>
+      <li><span class="ic gold">⑤</span><strong>Cấp 5 – Làm trước, nói sau:</strong> Kết quả lên tiếng. Đây là người đáng để học.</li>
+      <li><span class="ic gold">⑥</span><strong>Cấp 6 – Khiến người khác làm:</strong> Lãnh đạo giỏi. Biết chọn người, dùng người.</li>
+      <li><span class="ic gold">⑦</span><strong>Cấp 7 – Nuôi dưỡng người khác:</strong> Đào tạo thế hệ kế tiếp. Đây là bậc thầy.</li>
+      <li><span class="ic gold">⑧</span><strong>Cấp 8 – Thay đổi hệ thống:</strong> Vĩ nhân. Để lại di sản. Hiếm lắm – gặp được là phúc.</li>
+    </ul>
+    <p style="margin-top:14px;color:var(--text-muted);font-style:italic;">Quy tắc: Bạn ở cấp nào – sẽ thu hút người cấp đó. Muốn có người giỏi bên cạnh, trước hết hãy tự nâng cấp mình.</p>
+  </div>
+
+  <div class="warn">
+    ⚠ <strong>Nguyên tắc vàng:</strong> Nhìn người để chọn đúng người đồng hành – KHÔNG PHẢI để thao túng ai. Hiểu để tự vệ, không phải hiểu để tấn công. Người có thể thao túng nhưng chọn không thao túng – đó mới là đẳng cấp.
+  </div>
+</section>
+
+<!-- ========== 6. QUAN TRƯỜNG & QUYỀN LỰC ========== -->
+<section id="quan-truong">
+  <h2>Quan Trường & Đỉnh Cao Quyền Lực</h2>
+  <p class="section-sub">Hiểu luật chơi không phải để chơi bẩn – mà để không bị chơi. Ở đâu có người, ở đó có chính trị.</p>
+
+  <div class="warn">
+    ⚠ <strong>Lằn ranh:</strong> Hiểu quan trường để giữ mình trong sạch và đi đường dài. Không phải để tham nhũng, hối lộ hay đạp người khác. Người hiểu luật chơi mà giữ được nhân cách mới thật sự đi đến cuối con đường.
+  </div>
+
+  <div class="card">
+    <h3><span class="num">1</span>Đọc ý cấp trên – không chỉ nghe lời</h3>
+    <p>Cấp trên không phải lúc nào cũng nói hết ý. Có những việc họ muốn bạn làm nhưng không tiện nói ra. Người hiểu quan trường là người nghe được cả phần nói và phần không nói. Khi sếp nói "Tùy em" – có thể đó là phép thử. Khi sếp nói "Để anh xem lại" – có thể đó là "không". Khi sếp im lặng – hãy để ý, im lặng trong quan trường thường đáng sợ hơn mắng mỏ. Hãy học cách đọc ngôn ngữ cơ thể, ánh mắt, giọng điệu – đó là những tín hiệu thật mà miệng không nói ra.</p>
+    <span class="vidu">Sếp nói: "Việc này em làm thế nào cũng được." Nhưng ánh mắt ông ấy nhìn bản kế hoạch A của đồng nghiệp – đó là gợi ý. Người hiểu ý sẽ chọn A, và nói "Em thấy A có lý hơn." Sếp sẽ mỉm cười.</span>
+    <span class="quote">"Điều quan trọng không phải là người ta nói gì, mà là điều họ muốn nói mà không nói ra."</span>
+  </div>
+
+  <div class="card">
+    <h3><span class="num">2</span>Xây liên minh – không phải phe cánh</h3>
+    <p>Phe cánh là để đánh nhau. Liên minh là để cùng sống. Đừng chọn phe khi bạn chưa đủ mạnh – vì phe nào thắng cũng sẽ thanh lọc người yếu. Thay vào đó, hãy xây quan hệ với nhiều người, ở nhiều phòng ban, ở nhiều cấp. Đừng chỉ chơi với người cùng phòng – hãy chơi với cả bảo vệ, lễ tân, kế toán. Họ biết những chuyện mà sếp không biết. Người khôn ngoan không đặt cược vào một con ngựa – họ xây mạng lưới đủ rộng để bất kỳ ai thắng, họ vẫn an toàn.</p>
+    <span class="vidu">Bạn mới vào cơ quan. Đừng chỉ chơi với sếp. Hãy mua cà phê cho bảo vệ, hỏi thăm cô lao công. Khi bạn cần thông tin nội bộ, họ sẽ là người kể trước tiên.</span>
+    <span class="quote">"Muốn đi nhanh, đi một mình. Muốn đi xa, đi cùng nhau. Muốn đi qua quan trường, đi với nhiều người."</span>
+  </div>
+
+  <div class="card">
+    <h3><span class="num">3</span>Giữ mình trong sạch – thứ duy nhất không ai lấy được</h3>
+    <p>Ở quan trường, tiền bạc có thể mất, chức vụ có thể mất, quan hệ có thể mất. Nhưng nhân cách là thứ duy nhất không ai lấy đi được, trừ khi bạn tự trao. Người nhận hối lộ lần đầu, sẽ phải nhận lần thứ hai, thứ ba – vì kẻ đưa biết bạn đã dính. Người che giấu sai phạm của cấp trên, sẽ mãi mãi là con tin. Hãy nhớ: một khi bạn đã bán mình, bạn không thể chuộc lại.</p>
+    <span class="vidu">Có người đưa bạn phong bì để "giúp đỡ công việc". Bạn từ chối khéo: "Em cảm ơn anh, nhưng công việc em sẽ làm đúng quy trình. Anh yên tâm." Một lần từ chối, cả đời bình an.</span>
+    <span class="quote">"Kẻ thắng quan trường không phải người đi nhanh nhất, mà là người về đích an toàn nhất."</span>
+  </div>
+
+  <div class="card">
+    <h3><span class="num">4</span>Im lặng đúng lúc – vũ khí mạnh nhất nơi công quyền</h3>
+    <p>Trong môi trường quan trường, lời nói có thể là con dao hai lưỡi. Hãy học cách im lặng khi: cuộc họp đang căng thẳng, có người đang bị chất vấn, bạn chưa hiểu rõ vấn đề, hoặc bạn đang tức giận. Im lặng không phải là yếu – mà là sức mạnh của người biết tự chủ. Người quan trường khôn ngoan hiểu rằng: không ai bị phạt vì điều mình không nói. Và trong nhiều trường hợp, im lặng còn là cách để quan sát, để lắng nghe, để hiểu rõ ai đang là ai.</p>
+    <span class="vidu">Cuộc họp căng thẳng, hai phó phòng đang tranh cãi. Bạn là người mới, định phát biểu. Hãy im. Đợi sếp nói. Rồi bạn chỉ cần nói: "Em đồng ý với hướng của anh X, và xin bổ sung một ý nhỏ." – vừa khéo, vừa an toàn.</span>
+    <span class="quote">"Không ai bị phạt vì điều mình không nói. Rất nhiều người bị phạt vì điều mình đã nói."</span>
+  </div>
+
+  <div class="card">
+    <h3><span class="num">5</span>Sự cô đơn của người đứng đầu</h3>
+    <p>Người đứng trên đỉnh cao quyền lực có rất nhiều người vây quanh – nhưng rất ít người để tin. Ai cũng muốn gần họ, nhưng vì quyền lực, vì lợi ích, vì muốn được nâng đỡ. Cấp dưới nói điều họ muốn nghe, không phải điều họ cần nghe. Bạn bè cũ dần xa, vì khoảng cách quyền lực. Đó là cái giá của đỉnh cao. Người khôn ngoan ở đỉnh cao là người giữ được 1-2 người bạn thật, 1 người vợ/chồng hiểu mình, và 1 khoảng lặng riêng mỗi ngày – để không đánh mất chính mình giữa quyền lực.</p>
+    <span class="vidu">Tổng thống Mỹ nào cũng có hàng trăm trợ lý, nhưng chỉ 1-2 người bạn thật. Người đứng càng cao, càng cần một người dám nói: "Anh sai rồi." Nếu bạn không có ai như thế, bạn đang rất cô đơn.</span>
+    <span class="quote">"Nặng nhất không phải là vương miện, mà là sự cô đơn khi đội vương miện."</span>
+  </div>
+
+  <div class="card">
+    <h3><span class="num">6</span>Nhìn từ trên cao – thấy nhân gian như một ván cờ</h3>
+    <p>Khi bạn đứng trên đỉnh cao quyền lực, bạn sẽ thấy nhân gian như một ván cờ. Mỗi người là một quân cờ, mỗi hành động là một nước đi. Bạn thấy được ai đang tiến, ai đang lùi, ai đang chờ, ai đang bị hy sinh. Nhưng người khôn ngoan không chơi cờ người – vì họ biết: mình cũng chỉ là một quân cờ trong ván cờ lớn hơn của tạo hóa. Vì vậy, hãy chơi cờ với sự khiêm nhường: thắng không kiêu, thua không hận. Và hãy nhớ: ván cờ nào rồi cũng kết thúc. Điều còn lại sau ván cờ không phải là thắng thua – mà là cách bạn đã chơi.</p>
+    <span class="vidu">Một tỷ phú về già nói: "Tôi đã thắng nhiều ván cờ. Nhưng điều tôi tự hào nhất không phải là thắng – mà là tôi chưa từng đạp ai để thắng." Đó là đẳng cấp cuối cùng của người đứng trên đỉnh.</span>
+    <span class="quote">"Ván cờ nào rồi cũng tàn. Chỉ có cách chơi là còn lại."</span>
+  </div>
+</section>
+
+<!-- ========== 7. 90 NGHỀ ========== -->
+<section id="nghe-90">
+  <h2>90 Nghề Kiếm Tiền Thực Tế</h2>
+  <p class="section-sub">90 con đường – nhưng con đường nào cũng cần bạn đi bộ. Chọn 1 nghề phù hợp, học 3-6 tháng, kiên trì 2-3 năm.</p>
+
+  <div class="golden-tip">Không có nghề nào "nhanh" mà không cần học. Chọn nghề: (1) bạn giỏi, (2) thị trường cần, (3) bạn thích. Rồi đi đến cùng.</div>
+
+  <div class="group-title">💻 NHÓM 1: ONLINE – DIGITAL</div>
+  <div class="biz-grid">
+    <div class="biz-item"><span class="n">1.</span><span class="name">Bán Shopee/TikTok Shop</span><span class="desc">Vốn 0đ, lãi 20-40%</span></div>
+    <div class="biz-item"><span class="n">2.</span><span class="name">Affiliate Marketing</span><span class="desc">Giới thiệu sản phẩm, ăn hoa hồng</span></div>
+    <div class="biz-item"><span class="n">3.</span><span class="name">Viết content thuê</span><span class="desc">50-200k/bài</span></div>
+    <div class="biz-item"><span class="n">4.</span><span class="name">Chạy quảng cáo Facebook</span><span class="desc">10-15tr/tháng</span></div>
+    <div class="biz-item"><span class="n">5.</span><span class="name">Thiết kế Canva</span><span class="desc">100-500k/thiết kế</span></div>
+    <div class="biz-item"><span class="n">6.</span><span class="name">Dựng video TikTok</span><span class="desc">200-500k/video</span></div>
+    <div class="biz-item"><span class="n">7.</span><span class="name">SEO website</span><span class="desc">5-20tr/website</span></div>
+    <div class="biz-item"><span class="n">8.</span><span class="name">Dropshipping</span><span class="desc">Bán không cần kho</span></div>
+    <div class="biz-item"><span class="n">9.</span><span class="name">Freelance Upwork/Fiverr</span><span class="desc">5-20$/bài</span></div>
+    <div class="biz-item"><span class="n">10.</span><span class="name">Dịch thuật online</span><span class="desc">50-200k/trang</span></div>
+    <div class="biz-item"><span class="n">11.</span><span class="name">Chụp ảnh sản phẩm</span><span class="desc">100-300k/sp</span></div>
+    <div class="biz-item"><span class="n">12.</span><span class="name">Livestream bán hàng</span><span class="desc">Hoa hồng 10-30%</span></div>
+    <div class="biz-item"><span class="n">13.</span><span class="name">YouTube/Podcast</span><span class="desc">Kiên trì 6-12 tháng</span></div>
+    <div class="biz-item"><span class="n">14.</span><span class="name">Bán tài khoản số</span><span class="desc">Lãi mỏng, cần số lượng</span></div>
+    <div class="biz-item"><span class="n">15.</span><span class="name">Dịch vụ seeding</span><span class="desc">Cẩn thận pháp lý</span></div>
+    <div class="biz-item"><span class="n">16.</span><span class="name">Bán ebook, khóa học</span><span class="desc">Lãi 90%</span></div>
+    <div class="biz-item"><span class="n">17.</span><span class="name">Làm website</span><span class="desc">5-20tr/website</span></div>
+    <div class="biz-item"><span class="n">18.</span><span class="name">Google Ads</span><span class="desc">10-20% ngân sách</span></div>
+    <div class="biz-item"><span class="n">19.</span><span class="name">Viết kịch bản TikTok</span><span class="desc">200-800k/kịch bản</span></div>
+    <div class="biz-item"><span class="n">20.</span><span class="name">Quản trị fanpage</span><span class="desc">3-10tr/tháng/khách</span></div>
+    <div class="biz-item"><span class="n">21.</span><span class="name">Chỉnh sửa ảnh Photoshop</span><span class="desc">20-100k/ảnh</span></div>
+    <div class="biz-item"><span class="n">22.</span><span class="name">Làm app, game</span><span class="desc">Thu nhập dài hạn</span></div>
+    <div class="biz-item"><span class="n">23.</span><span class="name">Viết chuẩn SEO</span><span class="desc">100-500k/bài</span></div>
+    <div class="biz-item"><span class="n">24.</span><span class="name">Tư vấn tâm lý online</span><span class="desc">300-1000k/buổi</span></div>
+    <div class="biz-item"><span class="n">25.</span><span class="name">Dạy tiếng Anh online</span><span class="desc">150-500k/buổi</span></div>
+    <div class="biz-item"><span class="n">26.</span><span class="name">Podcast kể chuyện</span><span class="desc">Kiên trì 12 tháng</span></div>
+    <div class="biz-item"><span class="n">27.</span><span class="name">Bán source code, tool</span><span class="desc">200k-5tr/tool</span></div>
+    <div class="biz-item"><span class="n">28.</span><span class="name">Hosting, domain</span><span class="desc">Lãi 30-50%</span></div>
+    <div class="biz-item"><span class="n">29.</span><span class="name">Khóa học Canva/CapCut</span><span class="desc">200-500k/khóa</span></div>
+    <div class="biz-item"><span class="n">30.</span><span class="name">Viết CV, portfolio</span><span class="desc">200-800k/CV</span></div>
+  </div>
+
+  <div class="group-title">🛒 NHÓM 2: BÁN LẺ OFFLINE</div>
+  <div class="biz-grid">
+    <div class="biz-item"><span class="n">31.</span><span class="name">Quán cà phê take-away</span><span class="desc">Vốn 30-80tr</span></div>
+    <div class="biz-item"><span class="n">32.</span><span class="name">Quán trà sữa</span><span class="desc">Vốn 40-100tr</span></div>
+    <div class="biz-item"><span class="n">33.</span><span class="name">Xe cà phê lưu động</span><span class="desc">Vốn 10-20tr</span></div>
+    <div class="biz-item"><span class="n">34.</span><span class="name">Quán ăn sáng</span><span class="desc">Vốn 20-50tr</span></div>
+    <div class="biz-item"><span class="n">35.</span><span class="name">Cơm văn phòng</span><span class="desc">Vốn 10-30tr</span></div>
+    <div class="biz-item"><span class="n">36.</span><span class="name">Xe bánh mì</span><span class="desc">Vốn 5-15tr</span></div>
+    <div class="biz-item"><span class="n">37.</span><span class="name">Đồ ăn vặt</span><span class="desc">Vốn 5-15tr</span></div>
+    <div class="biz-item"><span class="n">38.</span><span class="name">Hoa tươi</span><span class="desc">Vốn 5-10tr</span></div>
+    <div class="biz-item"><span class="n">39.</span><span class="name">Shop quần áo</span><span class="desc">Vốn 15-50tr</span></div>
+    <div class="biz-item"><span class="n">40.</span><span class="name">Quần áo livestream</span><span class="desc">Vốn 5-15tr</span></div>
+    <div class="biz-item"><span class="n">41.</span><span class="name">Mỹ phẩm</span><span class="desc">Vốn 10-40tr</span></div>
+    <div class="biz-item"><span class="n">42.</span><span class="name">Đồ gia dụng</span><span class="desc">Vốn 10-30tr</span></div>
+    <div class="biz-item"><span class="n">43.</span><span class="name">Tạp hóa</span><span class="desc">Vốn 30-100tr</span></div>
+    <div class="biz-item"><span class="n">44.</span><span class="name">Cửa hàng tiện lợi</span><span class="desc">Vốn 50-200tr</span></div>
+    <div class="biz-item"><span class="n">45.</span><span class="name">Tiệm thuốc tây</span><span class="desc">Cần bằng dược</span></div>
+    <div class="biz-item"><span class="n">46.</span><span class="name">Tiệm photo, in ấn</span><span class="desc">Vốn 30-80tr</span></div>
+    <div class="biz-item"><span class="n">47.</span><span class="name">Rửa xe</span><span class="desc">Vốn 20-50tr</span></div>
+    <div class="biz-item"><span class="n">48.</span><span class="name">Sửa xe máy</span><span class="desc">Học nghề 6 tháng</span></div>
+    <div class="biz-item"><span class="n">49.</span><span class="name">Sửa điện thoại</span><span class="desc">Học 6-12 tháng</span></div>
+    <div class="biz-item"><span class="n">50.</span><span class="name">Giặt ủi</span><span class="desc">Vốn 30-80tr</span></div>
+    <div class="biz-item"><span class="n">51.</span><span class="name">Giặt hấp, khô</span><span class="desc">Vốn 60-150tr</span></div>
+    <div class="biz-item"><span class="n">52.</span><span class="name">Cắt tóc nam</span><span class="desc">Vốn 30-80tr</span></div>
+    <div class="biz-item"><span class="n">53.</span><span class="name">Nail</span><span class="desc">Học 3-6 tháng</span></div>
+    <div class="biz-item"><span class="n">54.</span><span class="name">Spa massage</span><span class="desc">Vốn 50-150tr</span></div>
+    <div class="biz-item"><span class="n">55.</span><span class="name">Tiệm bánh</span><span class="desc">Vốn 30-80tr</span></div>
+    <div class="biz-item"><span class="n">56.</span><span class="name">Cây cảnh, hoa lan</span><span class="desc">Vốn 10-50tr</span></div>
+    <div class="biz-item"><span class="n">57.</span><span class="name">Đồ chơi trẻ em</span><span class="desc">Vốn 15-50tr</span></div>
+    <div class="biz-item"><span class="n">58.</span><span class="name">Đồ thể thao</span><span class="desc">Vốn 20-60tr</span></div>
+    <div class="biz-item"><span class="n">59.</span><span class="name">Văn phòng phẩm</span><span class="desc">Vốn 20-50tr</span></div>
+    <div class="biz-item"><span class="n">60.</span><span class="name">Thực phẩm sạch</span><span class="desc">Vốn 15-50tr</span></div>
+  </div>
+
+  <div class="group-title">🛠 NHÓM 3: DỊCH VỤ & KỸ NĂNG</div>
+  <div class="biz-grid">
+    <div class="biz-item"><span class="n">61.</span><span class="name">Sửa điện lạnh</span><span class="desc">20-50tr/tháng</span></div>
+    <div class="biz-item"><span class="n">62.</span><span class="name">Thợ điện nước</span><span class="desc">15-35tr/tháng</span></div>
+    <div class="biz-item"><span class="n">63.</span><span class="name">Thợ mộc</span><span class="desc">25-60tr/tháng</span></div>
+    <div class="biz-item"><span class="n">64.</span><span class="name">Thợ xây, ốp lát</span><span class="desc">15-30tr/tháng</span></div>
+    <div class="biz-item"><span class="n">65.</span><span class="name">Thợ sơn</span><span class="desc">12-30tr/tháng</span></div>
+    <div class="biz-item"><span class="n">66.</span><span class="name">Thợ hàn</span><span class="desc">15-40tr/tháng</span></div>
+    <div class="biz-item"><span class="n">67.</span><span class="name">Cửa sắt, inox</span><span class="desc">20-50tr/tháng</span></div>
+    <div class="biz-item"><span class="n">68.</span><span class="name">Làm tóc</span><span class="desc">15-40tr/tháng</span></div>
+    <div class="biz-item"><span class="n">69.</span><span class="name">Nail, mi, phun xăm</span><span class="desc">20-50tr/tháng</span></div>
+    <div class="biz-item"><span class="n">70.</span><span class="name">Makeup cô dâu</span><span class="desc">15-40tr/tháng</span></div>
+    <div class="biz-item"><span class="n">71.</span><span class="name">Massage, spa</span><span class="desc">15-40tr/tháng</span></div>
+    <div class="biz-item"><span class="n">72.</span><span class="name">Đầu bếp nấu tiệc</span><span class="desc">20-50tr/tháng</span></div>
+    <div class="biz-item"><span class="n">73.</span><span class="name">Pha chế barista</span><span class="desc">7-20tr/tháng</span></div>
+    <div class="biz-item"><span class="n">74.</span><span class="name">Chạy xe công nghệ</span><span class="desc">10-20tr/tháng</span></div>
+    <div class="biz-item"><span class="n">75.</span><span class="name">Giao hàng</span><span class="desc">8-18tr/tháng</span></div>
+    <div class="biz-item"><span class="n">76.</span><span class="name">Gia sư, dạy kèm</span><span class="desc">10-40tr/tháng</span></div>
+    <div class="biz-item"><span class="n">77.</span><span class="name">Giúp việc theo giờ</span><span class="desc">8-18tr/tháng</span></div>
+    <div class="biz-item"><span class="n">78.</span><span class="name">Trông trẻ</span><span class="desc">8-25tr/tháng</span></div>
+    <div class="biz-item"><span class="n">79.</span><span class="name">Chụp ảnh cưới</span><span class="desc">15-50tr/tháng</span></div>
+    <div class="biz-item"><span class="n">80.</span><span class="name">Quay video cưới</span><span class="desc">20-60tr/tháng</span></div>
+    <div class="biz-item"><span class="n">81.</span><span class="name">Vệ sinh nhà, văn phòng</span><span class="desc">10-30tr/tháng</span></div>
+    <div class="biz-item"><span class="n">82.</span><span class="name">Chuyển nhà</span><span class="desc">15-40tr/tháng</span></div>
+    <div class="biz-item"><span class="n">83.</span><span class="name">Trông giữ xe</span><span class="desc">8-25tr/tháng</span></div>
+    <div class="biz-item"><span class="n">84.</span><span class="name">Chăm sóc cây cảnh</span><span class="desc">10-25tr/tháng</span></div>
+    <div class="biz-item"><span class="n">85.</span><span class="name">Sửa khóa</span><span class="desc">15-30tr/tháng</span></div>
+    <div class="biz-item"><span class="n">86.</span><span class="name">Cầm đồ nhỏ</span><span class="desc">Cần pháp lý</span></div>
+    <div class="biz-item"><span class="n">87.</span><span class="name">MC đám cưới</span><span class="desc">15-40tr/tháng</span></div>
+    <div class="biz-item"><span class="n">88.</span><span class="name">Ca hát đám cưới</span><span class="desc">10-40tr/tháng</span></div>
+    <div class="biz-item"><span class="n">89.</span><span class="name">Hướng dẫn viên du lịch</span><span class="desc">10-30tr/tháng</span></div>
+    <div class="biz-item"><span class="n">90.</span><span class="name">Chăm sóc thú cưng</span><span class="desc">10-30tr/tháng</span></div>
+  </div>
+
+  <div class="warn">
+    💎 <strong>Tinh túy:</strong> Không có nghề nào "nhanh" mà không cần học + kiên trì. 90 nghề trên là 90 con đường – nhưng con đường nào cũng phải đi bộ. Chọn 1 nghề phù hợp: (1) bạn giỏi, (2) thị trường cần, (3) bạn thích. Rồi đi đến cùng 2-3 năm. Đó là cách duy nhất để "kiếm nhiều tiền" thật sự.
+  </div>
+</section>
+
+<!-- ========== 8. LỘ TRÌNH ========== -->
+<section id="lo-trinh">
+  <h2>Lộ Trình 52 Tuần – Học Mỗi Tuần Một Điều</h2>
+  <p class="section-sub">Mỗi tuần một bài học – 52 tuần sau, bạn là một con người hoàn toàn khác.</p>
+
+  <div class="week">
+    <h3>📖 Tháng 1 – Nền tảng giao tiếp (Tuần 1–4)</h3>
+    <p><strong>Tuần 1:</strong> Luyện lắng nghe – không ngắt lời ai trong 7 ngày.<br>
+    <strong>Tuần 2:</strong> Học cách nhớ tên và gọi tên người khác.<br>
+    <strong>Tuần 3:</strong> Khen cụ thể ít nhất 1 người mỗi ngày.<br>
+    <strong>Tuần 4:</strong> Tập im lặng 3 giây trước mọi phản ứng.</p>
+  </div>
+
+  <div class="week">
+    <h3>📖 Tháng 2 – Triết học sống (Tuần 5–8)</h3>
+    <p><strong>Tuần 5:</strong> Đọc về Khắc Kỷ – viết 3 điều trong tầm kiểm soát mỗi sáng.<br>
+    <strong>Tuần 6:</strong> Thực hành "nước chảy đá mòn" – nhẫn một việc khó.<br>
+    <strong>Tuần 7:</strong> Tập nhìn mọi sự việc từ 3 góc nhìn.<br>
+    <strong>Tuần 8:</strong> Viết nhật ký biết ơn 7 ngày liên tiếp.</p>
+  </div>
+
+  <div class="week">
+    <h3>📖 Tháng 3 – Tư duy kinh doanh (Tuần 9–12)</h3>
+    <p><strong>Tuần 9:</strong> Áp dụng 80/20 – cắt bỏ 1 việc không tạo giá trị.<br>
+    <strong>Tuần 10:</strong> Học đàm phán – im lặng 5 giây trước khi trả lời.<br>
+    <strong>Tuần 11:</strong> Tập kể chuyện thay vì thuyết trình.<br>
+    <strong>Tuần 12:</strong> Đọc 1 cuốn sách về người thành công – ghi 3 bài học.</p>
+  </div>
+
+  <div class="week">
+    <h3>📖 Tháng 4 – Hiểu lòng người (Tuần 13–16)</h3>
+    <p><strong>Tuần 13:</strong> Quan sát hành động thay vì nghe lời nói.<br>
+    <strong>Tuần 14:</strong> Học nhận diện người thao túng – đọc kỹ 20 dấu hiệu.<br>
+    <strong>Tuần 15:</strong> Thực hành cho đi không cần nhận lại.<br>
+    <strong>Tuần 16:</strong> Viết ra 3 nỗi sợ của bản thân và cách vượt qua.</p>
+  </div>
+
+  <div class="week">
+    <h3>📖 Tháng 5 – Ứng xử khôn ngoan (Tuần 17–20)</h3>
+    <p><strong>Tuần 17:</strong> Không nói xấu ai trong 7 ngày.<br>
+    <strong>Tuần 18:</strong> Học cách từ chối khéo – thực hành 3 lần.<br>
+    <strong>Tuần 19:</strong> Giữ thể diện cho người khác trong 1 cuộc tranh luận.<br>
+    <strong>Tuần 20:</strong> Tập giữ khoảng lùi – không kể bí mật cho người mới quen.</p>
+  </div>
+
+  <div class="week">
+    <h3>📖 Tháng 6 – Ăn nói khéo (Tuần 21–24)</h3>
+    <p><strong>Tuần 21:</strong> Áp dụng "3 điều trước khi nói".<br>
+    <strong>Tuần 22:</strong> Đổi "nhưng" thành "và" trong mọi cuộc trò chuyện.<br>
+    <strong>Tuần 23:</strong> Khen gián tiếp 3 lần trong tuần.<br>
+    <strong>Tuần 24:</strong> Học cách hỏi thay vì khẳng định.</p>
+  </div>
+
+  <div class="week">
+    <h3>📖 Tháng 7 – Quan trường (Tuần 25–28)</h3>
+    <p><strong>Tuần 25:</strong> Tập đọc ý cấp trên – không chỉ nghe lời.<br>
+    <strong>Tuần 26:</strong> Xây quan hệ với 3 phòng ban khác.<br>
+    <strong>Tuần 27:</strong> Thực hành im lặng đúng lúc trong cuộc họp.<br>
+    <strong>Tuần 28:</strong> Viết ra 3 việc mình sẽ không bao giờ làm vì nhân cách.</p>
+  </div>
+
+  <div class="week">
+    <h3>📖 Tháng 8 – Đỉnh cao quyền lực (Tuần 29–32)</h3>
+    <p><strong>Tuần 29:</strong> Viết ra 3 người bạn thật sự – gọi điện hỏi thăm.<br>
+    <strong>Tuần 30:</strong> Học cách chọn người tài, người trung, người khéo.<br>
+    <strong>Tuần 31:</strong> Đọc về một nhà lãnh đạo vĩ đại – rút 3 bài học.<br>
+    <strong>Tuần 32:</strong> Tự hỏi: nếu mất quyền lực hôm nay, mình còn gì?</p>
+  </div>
+
+  <div class="week">
+    <h3>📖 Tháng 9–10 – 90 nghề (Tuần 33–40)</h3>
+    <p><strong>Tuần 33–36:</strong> Mỗi tuần chọn 2-3 nghề trong danh sách 90, tìm hiểu sâu, thử làm nhỏ.<br>
+    <strong>Tuần 37–40:</strong> Chọn 1 nghề phù hợp, bắt đầu học kỹ năng cần thiết.</p>
+  </div>
+
+  <div class="week">
+    <h3>📖 Tháng 11–12 – Tổng hợp & tỏa sáng (Tuần 41–52)</h3>
+    <p>Mỗi tuần chọn 1 chủ đề trong cuộc sống thật (một cuộc cãi vã, một cuộc đàm phán, một mối quan hệ khó) và áp dụng TOÀN BỘ bài học. Viết lại kết quả. Sau 52 tuần, đọc lại từ đầu – bạn sẽ thấy một con người hoàn toàn khác trong gương.</p>
+  </div>
+
+  <div class="golden-tip">Học 52 tuần này không phải để thao túng ai – mà để không ai thao túng được bạn, và để bạn có thể yêu thương mọi người sâu sắc hơn. Kiến thức về lòng người là con dao hai lưỡi: người dùng để chữa lành sẽ chữa lành cả mình và người. Người dùng để làm đau sẽ làm đau chính mình trước tiên.</div>
+</section>
+
+</main>
+
+<footer>
+  <p>✦ <span>ĐỈNH CAO NHÂN SINH</span> – Tinh Hoa Bậc Thầy ✦</p>
+  <p style="margin-top:10px;">"Đứng trên đỉnh cao không phải để nhìn xuống ai – mà để thấy rõ chính mình và đi xa hơn."</p>
+  <p style="margin-top:8px;">Hiểu người để thương người – không phải để thao túng ai.</p>
+</footer>
+
+<script>
+  // TAB NAVIGATION
+  const buttons = document.querySelectorAll('nav button');
+  const sections = document.querySelectorAll('section');
+
+  buttons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const target = btn.dataset.tab;
+      buttons.forEach(b => b.classList.remove('active'));
+      sections.forEach(s => { s.classList.remove('active'); s.style.display='none'; });
+      btn.classList.add('active');
+      const el = document.getElementById(target);
+      el.classList.add('active'); el.style.display='block';
+      window.scrollTo({ top:0, behavior:'smooth' });
+    });
+  });
+
+  // SEARCH ỨNG XỬ
+  const sUX = document.getElementById('searchUX');
+  if (sUX) {
+    sUX.addEventListener('input', e => {
+      const q = e.target.value.toLowerCase().trim();
+      document.querySelectorAll('#listUX .item').forEach(it => {
+        it.style.display = it.textContent.toLowerCase().includes(q) ? '' : 'none';
+      });
+    });
+  }
+
+  // SCROLL ANIMATION - cards fade in
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.08 });
+
+  document.querySelectorAll('.card, .week, .item, .biz-item, .badge-list li').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(20px)';
+    el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+    observer.observe(el);
+  });
+</script>
+
 </body>
+</html>
